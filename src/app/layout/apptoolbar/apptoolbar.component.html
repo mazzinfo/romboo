@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+   
+
+    <button mat-button [matMenuTriggerFor]="master">Master</button>
+    <button mat-button >Transactions</button>
+    <button mat-button>Front Desk</button>
+    <button mat-button >Check-In</button>
+    <button mat-button >Check-Out</button>
+    <button mat-button >Reservation</button>
+    <button mat-button >Gst</button>
+    <button mat-button >Chart</button>
+    <button mat-button >Utilities</button>
+    <button mat-button >Query</button>
+    <button mat-button >Report</button>
+    <button mat-button >Tools</button>
+    <button mat-button>Help</button>
+    <button mat-button >Elock</button>
+
+<mat-menu #master="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="roominfo">Room Info</button>
+  <button mat-menu-item [matMenuTriggerFor]="companyinfo">Company Info</button>
+</mat-menu>
+
+<mat-menu #roominfo="matMenu">
+  <button mat-menu-item >Room Type</button>
+  <button mat-menu-item >Room Master</button>
+  <button mat-menu-item >Room Rent Master</button>
+ 
+</mat-menu>
+
+<mat-menu #companyinfo="matMenu">
+  <button mat-menu-item>Title Master</button>
+  <button mat-menu-item>Company Master</button>
+  <button mat-menu-item>Company Discount</button>
+  <button mat-menu-item>Debtor Opening Balance</button>
+  
+</mat-menu>
+  </mat-toolbar-row>
+
+  
+</mat-toolbar>
