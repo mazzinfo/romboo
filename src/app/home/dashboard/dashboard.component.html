@@ -1,3 +1,63 @@
 <app-apptoolbar></app-apptoolbar>
 
 <app-appheaderbar></app-appheaderbar>
+<section>
+    <div class="body-head">Room Status</div>
+    <div class="room-block">
+        <mat-grid-list class="room-grid-block" cols="10" rowHeight="70px">
+            <mat-grid-tile class="occupied">   101 Dlx - SAUD  19-06-19 01:20 pm </mat-grid-tile>
+            <mat-grid-tile class="vacant">   102 Dlx  </mat-grid-tile>
+            <mat-grid-tile class="vacant">   103 Dlx  </mat-grid-tile>
+            <mat-grid-tile class="vacant">   104 Dlx  </mat-grid-tile>
+            <mat-grid-tile class="blocked">    </mat-grid-tile>
+            <mat-grid-tile class="dirty">   105 Dlx - Chk Out  19-06-19 01:20 pm </mat-grid-tile>
+            <mat-grid-tile class="vacant">   106 Dlx  </mat-grid-tile>
+            <mat-grid-tile class="vacant">   107 Dlx  </mat-grid-tile>
+            <mat-grid-tile class="occupied">   108 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile>
+            <mat-grid-tile class="occupied">   109 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile>
+            <mat-grid-tile class="occupied">   110 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile>
+            <mat-grid-tile class="occupied">   111 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile>
+            </mat-grid-list>
+         </div>
+    <aside class="room-status-block">
+
+        <mat-grid-list class="menu-grid" cols="2" rowHeight="20px">
+            <mat-grid-tile class="occupied">
+
+                OCCUPIED
+
+            </mat-grid-tile>
+            <mat-grid-tile class="dirty">
+
+                DIRTY
+
+            </mat-grid-tile>
+            <mat-grid-tile class="vacant">
+
+                VACANT
+
+            </mat-grid-tile>
+            <mat-grid-tile class="blocked">
+
+                BLOCKED
+
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list class="room-status-list" cols="1" rowHeight="30px">
+<mat-grid-tile><div class="room-status-list-right">Total Room</div>    <div class="room-status-list-left" >9</div></mat-grid-tile>
+<mat-grid-tile><div class="room-status-list-right">Ready</div>    <div class="room-status-list-left" >8</div> </mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">occupied</div>    <div class="room-status-list-left" >0</div></mat-grid-tile>   
+  <mat-grid-tile><div class="room-status-list-right">Block</div>    <div class="room-status-list-left" >1</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Not Ready</div>    <div class="room-status-list-left" >0</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Total Pax</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Ex-Bed</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Occ %</div>    <div class="room-status-list-left" >0</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Today Arr</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Today Dep</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Day Use</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>             
+                </mat-grid-list>
+       
+    </aside>
+
+</section>
