@@ -1,3 +1,5 @@
+import { RestDataApiService } from './../../shared/services/rest-data-api.service';
+import { RestApiService } from './../../shared/services/rest-api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
+  selectedRoomType:any;
+  selectedBlock:any;
+  selectedFloor:any;
+  selectedFilter:any;
+  constructor(public restDataApiService: RestDataApiService) { 
+this.selectedRoomType="all";
+    
+  }
 
   ngOnInit() {
+    this.selectedRoomType="all";
+    this.selectedBlock="all";
+    this.selectedFloor="all";
+    this.selectedFilter="all";
+    this.restDataApiService.getCurrentRoomList();
   }
 
 }

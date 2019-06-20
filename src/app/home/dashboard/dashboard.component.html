@@ -2,10 +2,103 @@
 
 <app-appheaderbar></app-appheaderbar>
 <section>
-    <div class="body-head">Room Status</div>
+    <div class="body-head">
+            <mat-grid-list  class="room-filter" cols="11" rowHeight="50px">
+                    <mat-grid-tile> 
+                            Room Type
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                            <mat-form-field class="custom-form-field">
+                                <mat-select class="select-cutom"  [value]="selectedRoomType" >
+                                  <mat-option  value="all">All</mat-option>
+                                  <mat-option value="dlx">Dlx</mat-option>
+                                  <mat-option value="std">STD</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </mat-grid-tile>
+                        
+                        <mat-grid-tile> Block</mat-grid-tile>
+                        <mat-grid-tile>
+                                <mat-form-field class="custom-form-field">
+             
+              <mat-select class="select-cutom" [value]="selectedBlock" >
+                <mat-option value="all">All</mat-option>
+                <mat-option value="dlx">Dlx</mat-option>
+                <mat-option value="std">STD</mat-option>
+              </mat-select>
+            </mat-form-field>
+                        </mat-grid-tile>
+                    <mat-grid-tile>   Floor</mat-grid-tile>
+                    <mat-grid-tile>    
+                            <mat-form-field class="custom-form-field">
+                <mat-select class="select-cutom" [value]="selectedFloor"  >
+                  <mat-option value="all">All</mat-option>
+                  <mat-option value="dlx">Dlx</mat-option>
+                  <mat-option value="std">STD</mat-option>
+                </mat-select>
+              </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+              Filter By
+              </mat-grid-tile>
+              <mat-grid-tile>
+                    <mat-form-field class="custom-form-field">
+                  <mat-select class="select-cutom" [value]="selectedFilter"  >
+                    <mat-option value="all">All</mat-option>
+                    <mat-option value="dlx">Dlx</mat-option>
+                    <mat-option value="std">STD</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </mat-grid-tile>
+        <mat-grid-tile>  Room</mat-grid-tile>
+
+    <mat-grid-tile>
+                <mat-form-field class="custom-form-field">
+                        <input class="" matInput placeholder="Search Room" value="">
+                      </mat-form-field>
+                    </mat-grid-tile>
+                <mat-grid-tile>
+                      <button class="get-btn" mat-button>Get</button>
+                    </mat-grid-tile>
+                </mat-grid-list>    
+    </div>
     <div class="room-block">
-        <mat-grid-list class="room-grid-block" cols="10" rowHeight="70px">
-            <mat-grid-tile class="occupied">   101 Dlx - SAUD  19-06-19 01:20 pm </mat-grid-tile>
+        <mat-grid-list class="room-grid-block" cols="12" rowHeight="70px">
+
+          <div *ngFor="let room of restDataApiService.currentRoomData">
+            <mat-grid-tile  class="occupied"   *ngIf="room.roomCurrentStatus=='I'" >
+              
+            <span>{{room.roomNo}}   {{room.typeName}}  <span *ngIf="room.roomCurrentStatus=='D'"> Chk Out - {{room.dateTimeCheckin}} </span> 
+            <span *ngIf="room.roomCurrentStatus=='I'"> {{room.guestName}} -   {{room.dateTimeCheckin | date:'d-MM-yy, h:mm a'}} </span>  </span>
+              
+               
+            </mat-grid-tile>
+
+
+            <mat-grid-tile  class="vacant"   *ngIf="room.roomCurrentStatus=='V'" >
+              
+                <span>{{room.roomNo}} {{room.typeName}}  <span *ngIf="room.roomCurrentStatus=='D'"> Chk Out - {{room.dateTimeCheckin}} </span> 
+                <span *ngIf="room.roomCurrentStatus=='I'"> {{room.guestName}} - {{room.dateTimeCheckin | date:'d-MM-yy, h:mm a'}} </span>  </span>
+                  
+                   
+                </mat-grid-tile>
+
+                <mat-grid-tile  class="blocked"   *ngIf="room.roomCurrentStatus=='U'" >
+              
+                   
+                       
+                    </mat-grid-tile>
+
+                    <mat-grid-tile  class="dirty"   *ngIf="room.roomCurrentStatus=='D'" >
+              
+                        <span>{{room.roomNo}} {{room.typeName}}  <span *ngIf="room.roomCurrentStatus=='D'"> Chk Out - &nbsp;&nbsp; {{room.dateTimeCheckin | date:'d-MM-yy, h:mm a'}} </span> 
+                         </span>
+                          
+                           
+                        </mat-grid-tile>
+</div>
+
+            <!-- <mat-grid-tile class="occupied">   101 Dlx - SAUD  19-06-19 01:20 pm </mat-grid-tile>
             <mat-grid-tile class="vacant">   102 Dlx  </mat-grid-tile>
             <mat-grid-tile class="vacant">   103 Dlx  </mat-grid-tile>
             <mat-grid-tile class="vacant">   104 Dlx  </mat-grid-tile>
@@ -16,7 +109,7 @@
             <mat-grid-tile class="occupied">   108 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile>
             <mat-grid-tile class="occupied">   109 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile>
             <mat-grid-tile class="occupied">   110 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile>
-            <mat-grid-tile class="occupied">   111 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile>
+            <mat-grid-tile class="occupied">   111 Dlx - SAUD - 19-06-19 01:20 pm </mat-grid-tile> -->
             </mat-grid-list>
          </div>
     <aside class="room-status-block">

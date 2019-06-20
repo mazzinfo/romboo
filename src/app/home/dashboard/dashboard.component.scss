@@ -1,9 +1,33 @@
 .body-head{
-    background: #0f6296; text-align: center;color: white;
-    padding: 8px;
+    background: white;
+    color: #0f6296;
+   
     font-size: 18px;
     border: #261D9D;
 }
+
+.room-filter{
+
+    .select-cutom{
+        background: white;
+        height: 5px;
+        font-size: 17px;
+       
+    } 
+
+    .custom-form-field{
+        font-size: 17px;
+        margin-left: 24%;
+
+    }
+}
+
+.get-btn{
+    background: #004400;
+    color: wheat;
+    font-weight: bold;
+}
+
 .room-status-list{
     background: #90A437;
 }
