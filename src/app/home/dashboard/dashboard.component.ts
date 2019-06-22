@@ -23,6 +23,7 @@ this.selectedRoomType="all";
     this.selectedFloor="all";
     this.selectedFilter="all";
     this.restDataApiService.getCurrentRoomList();
+    this.restDataApiService.getTotalRoomList();
   }
 
 }

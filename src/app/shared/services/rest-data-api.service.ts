@@ -8,6 +8,8 @@ export class RestDataApiService {
 
   public currentRoomData: any = [];
 
+  public totalRoomData: any='';
+
   constructor(public api: RestApiService) { }
 
 
@@ -16,6 +18,25 @@ export class RestDataApiService {
     this.api.getCurrentRoomStatus()
       .subscribe((res: any[]) => {
         this.currentRoomData = res;
+      //  alert("res.."+res);
+       
+      }, err => {
+
+        console.log(err);
+       
+        // this.toastService.presentToastWithMessage('Internet is not connected');
+
+      });
+
+  }
+
+
+
+  async getTotalRoomList() {
+    
+    this.api.getTotalRoomStatus()
+      .subscribe((res: any) => {
+        this.totalRoomData = res;
       //  alert("res.."+res);
        
       }, err => {

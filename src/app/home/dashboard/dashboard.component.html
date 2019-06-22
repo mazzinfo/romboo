@@ -63,7 +63,7 @@
                 </mat-grid-list>    
     </div>
     <div class="room-block">
-        <mat-grid-list class="room-grid-block" cols="12" rowHeight="70px">
+        <mat-grid-list class="room-grid-block" cols="10" rowHeight="70px">
 
           <div *ngFor="let room of restDataApiService.currentRoomData">
             <mat-grid-tile  class="occupied"   *ngIf="room.roomCurrentStatus=='I'" >
@@ -114,41 +114,54 @@
          </div>
     <aside class="room-status-block">
 
-        <mat-grid-list class="menu-grid" cols="2" rowHeight="20px">
+        <mat-grid-list class="menu-grid" cols="2" rowHeight="40px">
             <mat-grid-tile class="occupied">
 
-                OCCUPIED
+                OCCUPIED ({{restDataApiService.totalRoomData.occupied}})
 
             </mat-grid-tile>
             <mat-grid-tile class="dirty">
 
-                DIRTY
+                DIRTY ({{restDataApiService.totalRoomData.dirty}})
 
             </mat-grid-tile>
             <mat-grid-tile class="vacant">
 
-                VACANT
+                VACANT ({{restDataApiService.totalRoomData.vacant}})
 
             </mat-grid-tile>
-            <mat-grid-tile class="blocked">
+            <mat-grid-tile class="booking">
 
-                BLOCKED
+                BOOKING ({{restDataApiService.totalRoomData.occupied}})
 
             </mat-grid-tile>
+
+            <mat-grid-tile class="m-blocked">
+
+              MANAGEMENT BLOCKED ({{restDataApiService.totalRoomData.occupied}})
+
+          </mat-grid-tile>
+
+          <mat-grid-tile class="blocked">
+
+            OUT OF SERVICE ({{restDataApiService.totalRoomData.blocked}})
+
+        </mat-grid-tile>
         </mat-grid-list>
 
         <mat-grid-list class="room-status-list" cols="1" rowHeight="30px">
-<mat-grid-tile><div class="room-status-list-right">Total Room</div>    <div class="room-status-list-left" >9</div></mat-grid-tile>
-<mat-grid-tile><div class="room-status-list-right">Ready</div>    <div class="room-status-list-left" >8</div> </mat-grid-tile>
-  <mat-grid-tile><div class="room-status-list-right">occupied</div>    <div class="room-status-list-left" >0</div></mat-grid-tile>   
-  <mat-grid-tile><div class="room-status-list-right">Block</div>    <div class="room-status-list-left" >1</div></mat-grid-tile>
-  <mat-grid-tile><div class="room-status-list-right">Not Ready</div>    <div class="room-status-list-left" >0</div></mat-grid-tile>
-  <mat-grid-tile><div class="room-status-list-right">Total Pax</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>
-  <mat-grid-tile><div class="room-status-list-right">Ex-Bed</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>
-  <mat-grid-tile><div class="room-status-list-right">Occ %</div>    <div class="room-status-list-left" >0</div></mat-grid-tile>
-  <mat-grid-tile><div class="room-status-list-right">Today Arr</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>
-  <mat-grid-tile><div class="room-status-list-right">Today Dep</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>
-  <mat-grid-tile><div class="room-status-list-right">Day Use</div>    <div class="room-status-list-left" >-</div></mat-grid-tile>             
+<mat-grid-tile><div class="room-status-list-right">Total Room</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.totalRooms}}</div></mat-grid-tile>
+<mat-grid-tile><div class="room-status-list-right">Ready</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.vacant}}</div> </mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">occupied</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.occupied}}</div></mat-grid-tile>   
+  <mat-grid-tile><div class="room-status-list-right">Block</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.blocked}}</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Not Ready</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.dirty}}</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Total Pax</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.totalPax}}</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Ex-Bed</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.exBed}}</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Occ %</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.occPer}}</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Today Arr</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.totalArr}}</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Today Dep</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.todayDep}}</div></mat-grid-tile>
+  <mat-grid-tile><div class="room-status-list-right">Day Use</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.dayUse}}</div></mat-grid-tile>             
+  <mat-grid-tile><div class="room-status-list-right">Continue Room</div>    <div class="room-status-list-left" >{{restDataApiService.totalRoomData.totalContinueRoom}}</div></mat-grid-tile>             
                 </mat-grid-list>
        
     </aside>
