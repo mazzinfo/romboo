@@ -1,4 +1,4 @@
-<app-apptoolbar></app-apptoolbar>
+<!-- <app-apptoolbar></app-apptoolbar> -->
 
 <app-appheaderbar></app-appheaderbar>
 <section>
@@ -91,7 +91,7 @@
 
                     <mat-grid-tile  class="dirty"   *ngIf="room.roomCurrentStatus=='D'" >
               
-                        <span>{{room.roomNo}} {{room.typeName}}  <span *ngIf="room.roomCurrentStatus=='D'"> Chk Out - &nbsp;&nbsp; {{room.dateTimeCheckin | date:'d-MM-yy, h:mm a'}} </span> 
+                        <span>{{room.roomNo}} {{room.typeName}}  <span *ngIf="room.roomCurrentStatus=='D'"> Chk Out - &nbsp;&nbsp; {{room.dateTimeCheckout   | date:'d-MM-yy, h:mm a'}} </span> 
                          </span>
                           
                            

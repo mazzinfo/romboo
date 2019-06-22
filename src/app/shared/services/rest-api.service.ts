@@ -8,7 +8,9 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class RestApiService {
 
-  apiUrl = 'http://192.168.1.6:8080/roomapi/';
+  // apiUrl = 'http://192.168.1.6:8080/roomapi/';
+
+  apiUrl = 'http://192.168.1.4:8080/roomapi/';
 
   constructor(private http: HttpClient) {
 
