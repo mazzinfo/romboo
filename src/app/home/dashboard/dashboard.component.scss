@@ -30,12 +30,14 @@
 
 .room-status-list{
     background: #90A437;
+   
 }
 .room-status-list-right{
     width: 75%;
     color: white;
     font-size: 15px;
    font-weight: bold;
+
 }
 .room-grid-block{
     padding: 4px;
@@ -107,4 +109,11 @@ height: 90%;
     font-size: 10px;
     font-family: Verdana, Geneva, 'Arial Narrow Bold', sans-serif;
 
+}
+
+.room-status-list{
+
+    mat-grid-tile{
+    
+    }
 }
