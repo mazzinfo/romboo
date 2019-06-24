@@ -7,12 +7,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CheckInComponent } from './check-in/check-in.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { DirtyComponent } from './dirty/dirty.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 @NgModule({
-  declarations: [ DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent],
+  declarations: [ DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent],
   imports: [
     CommonModule,LayoutModule,MaterialModule
   ],
-  exports:[CheckInComponent,CheckOutComponent,DirtyComponent]
+  exports:[CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent]
 })
 export class HomeModule { }
