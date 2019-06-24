@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent implements OnInit {
+  firstName: string;
+  lastName: string;
+
 
   constructor() { }
 
   ngOnInit() {
+
+    this.firstName = 'Alec';
+    this.lastName = 'Thompson';
   }
 
 }

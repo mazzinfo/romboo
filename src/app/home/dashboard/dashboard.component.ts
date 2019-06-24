@@ -61,7 +61,7 @@ this.selectedRoomType="all";
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    this.dialog.open(DirtyComponent, dialogConfig);
+    
 
     
     const dialogRef = this.dialog.open(DirtyComponent, dialogConfig);

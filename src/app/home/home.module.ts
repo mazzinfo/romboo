@@ -14,6 +14,6 @@ import { ReservationComponent } from './reservation/reservation.component';
   imports: [
     CommonModule,LayoutModule,MaterialModule
   ],
-  exports:[CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent]
+  exports:[CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,ReservationComponent]
 })
 export class HomeModule { }

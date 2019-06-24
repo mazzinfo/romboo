@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DirtyComponent } from './home/dirty/dirty.component';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReservationComponent } from './home/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginFormModule,
     HomeModule
   ],
-  entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent],
+  entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
