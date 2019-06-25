@@ -7,6 +7,7 @@ import { RestApiService } from './rest-api.service';
 export class RestDataApiService {
 
   public currentRoomData: any = [];
+  public guestureListData: any = [];
 
   public totalRoomData: any='';
 
@@ -30,6 +31,21 @@ export class RestDataApiService {
 
   }
 
+
+  async getGuestureDataList() {
+    
+    this.api.getGuestureList()
+      .subscribe((res: any) => {
+        this.guestureListData = res;
+      //  alert("res.."+res);
+       
+      }, err => {
+
+        console.log(err);
+
+      });
+
+  }
 
 
   async getTotalRoomList() {

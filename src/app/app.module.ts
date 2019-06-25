@@ -13,9 +13,15 @@ import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+
+
 import { DirtyComponent } from './home/dirty/dirty.component';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationComponent } from './home/reservation/reservation.component';
+import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
+import {MOMENT_DATE_FORMATS, MomentDateAdapter } from 'src/environments/environment';
+
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -31,13 +37,16 @@ import { ReservationComponent } from './home/reservation/reservation.component';
     MaterialModule,
     MatIconModule, 
     MatDialogModule,
+    FormsModule,
     HttpClientModule,
+    NgxMaterialTimepickerModule,
     LayoutModule,
     LoginFormModule,
     HomeModule
   ],
   entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent],
-  providers: [],
+  providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},
+    {provide: DateAdapter, useClass: MomentDateAdapter}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

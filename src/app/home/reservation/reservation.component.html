@@ -48,84 +48,123 @@
   
   </mat-grid-list>
 
-  <div class="example-container">
-      <div class="container">
-         
-          <div class="row" style="margin-top: 30px">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-header">
-                  <i class="material-icons">perm_identity</i>
-                </div>
-                <div class="card-content">
-                  <h4 class="card-title">Edit Profile -
-                    <small class="category">Complete your profile</small>
-                  </h4>
-                  <form>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <mat-form-field color="accent">
-                          <input matInput type="text" placeholder="First Name"  value="Ci" name="firstName">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-6">
-                        <mat-form-field color="accent">
-                          <input matInput type="text" placeholder="Last Name"  value="Clia" name="lastName">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <mat-form-field color="accent">
-                          <input matInput type="text" placeholder="Address">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <mat-form-field color="accent">
-                          <input matInput type="text" placeholder="City">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-4">
-                        <mat-form-field color="accent">
-                          <input matInput type="text" placeholder="Country">
-                        </mat-form-field>
-                      </div>
-                      <div class="col-md-4">
-                        <mat-form-field color="accent">
-                          <input matInput type="text" placeholder="Postcode">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <label class="textarea-label">About Me</label>
-                        <mat-form-field color="accent">
-                          <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row action-btn">
-                      <button md-raised-button type="submit" class="btn btn-rose">UPDATE PROFILE</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card right-profile">
-                <div class="profile">
-                  <!-- <img src="../../../assets/img/marc.jpg" alt="profile"/> -->
-                </div>
-                <h6>CEO / CO-FOUNDER</h6>
-                <h4>{{ firstName }} {{ lastName }}</h4>
-                <p>Don't be scared of the truth because we need to restart the human foundation in truth And I love you like
-                  Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
-                <button mat-raised-button class="btn btn-rose btn-round">CHANGE</button>
-              </div>
-            </div>
+  <form class="myForm">
+      <fieldset >
+          <legend>New Booking</legend>
+    <div class="row">
+       
+      <div class="column">
+
+          <div class="input-group">
+          <mat-form-field color="accent">
+              <input matInput [matDatepicker]="bookingDatePicker" [(ngModel)]="bookingDate" name="bookingDate" placeholder="Booking Date">
+              <mat-datepicker-toggle matSuffix [for]="bookingDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #bookingDatePicker></mat-datepicker>
+            </mat-form-field>
           </div>
-        </div>
-        
+
+      </div>
+      <div class="column">
+          <div class="input-group">
+              <mat-form-field color="accent">
+                  <input matInput [matDatepicker]="fromDatePicker" [(ngModel)]="bookingFromDate" name="bookingFromDate" placeholder="From Date">
+                  <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #fromDatePicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+         
+        <!-- <fieldset class="taxi">
+          <legend>Which taxi do you require?</legend>
+          <label> <input type="radio" id="taxi_car" value="car"> Car </label>
+          <label> <input type="radio" id="taxi_van" value="van"> Van </label>
+          <label> <input type="radio" id="taxi_tuk" value="tuktuk"> Tuk Tuk </label>
+        </fieldset>
+  
+        <fieldset class="extras">
+          <legend>Extras</legend>
+          <label> <input type="checkbox" id="extras_baby" value="baby"> Baby Seat </label>
+          <label> <input type="checkbox" id="extras_wheel" value="wheelchair"> Wheelchair Access </label>
+          <label> <input type="checkbox" id="extras_tip" value="tip"> Stock Tip </label>
+        </fieldset> -->
+      </div>
+
+      <div class="column">
+         
+            <div class="input-group">
+            <div class="ngx-timepicker-fromtime-field">
+                <ngx-timepicker-field class="ngx-timepicker-fromtime" [(ngModel)]="bookingFromTime" name="bookingFromTime" [toggleIcon]="icon"></ngx-timepicker-field>
+                <ng-template #icon>
+                    <i class="material-icons schedule">schedule</i>
+                </ng-template>
+            </div>
+            </div>
+
+          
+              </div>
+
+
+              <div  class="column">
+
+                 <div class="input-group">
+              <mat-form-field color="accent">
+                  <input matInput [matDatepicker]="toDatePicker" [(ngModel)]="bookingToDate" name="bookingToDate" placeholder="To Date">
+                  <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #toDatePicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              </div>
+
+              <div class="column">
+         
+                  <div class="input-group">
+                  <div class="ngx-timepicker-fromtime-field">
+                      <ngx-timepicker-field class="ngx-timepicker-fromtime"  [(ngModel)]="bookingToTime" name="bookingToTime" [toggleIcon]="icon"></ngx-timepicker-field>
+                      <ng-template #icon>
+                          <i class="material-icons schedule">schedule</i>
+                      </ng-template>
+                  </div>
+                  </div>
+      
+                
+                    </div>
+
+                 
     </div>
+    <div class="row1">
+        <div class="column">
+            <div class="input-group">
+          <div class="custom-mat-form-field">
+        <mat-label class="guest-label">Regular Guest  </mat-label>
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button class="guest-btn" value="1">Yes</mat-radio-button>
+          <mat-radio-button class="guest-btn" value="2">No</mat-radio-button>
+        </mat-radio-group>
+        </div>
+        </div>
+        </div>
+        <div class="column">
+            <div class="input-group">
+            <mat-form-field>
+                <mat-label>Guesture</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let guesture of restDataApiService.guestureListData" [value]="guesture.pcKey">
+                    {{guesture.description}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
+
+        </div>
+
+
+    </div>
+    
+    <div class="row">
+      
+      <button id="submit">Submit Booking</button>
+      
+    </div>
+
+    </fieldset>
+  </form>

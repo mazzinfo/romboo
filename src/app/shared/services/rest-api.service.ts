@@ -29,9 +29,13 @@ export class RestApiService {
 
     return throwError(errorMessage);
   }
-
   getCurrentRoomStatus(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'roomCurrentStatus').pipe(retry(1), catchError(this.handleError));
+  }
+
+
+  getGuestureList(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'guestureList').pipe(retry(1), catchError(this.handleError));
   }
 
   getTotalRoomStatus(): Observable<any> {
