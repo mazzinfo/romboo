@@ -28,6 +28,8 @@ this.selectedRoomType="all";
     this.selectedFilter="all";
     this.restDataApiService.getCurrentRoomList();
     this.restDataApiService.getTotalRoomList();
+
+   
   }
 
   checkoutGo(){

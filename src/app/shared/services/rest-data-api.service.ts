@@ -9,6 +9,12 @@ export class RestDataApiService {
   public currentRoomData: any = [];
   public guestureListData: any = [];
   public companyListData: any = [];
+  public todayBookingListData: any = [];
+  public bookingStatusListData: any = [];
+  public roomTypeListData: any = [];
+
+  
+  
 
   public totalRoomData: any='';
 
@@ -38,6 +44,37 @@ export class RestDataApiService {
     this.api.getCompanyList()
       .subscribe((res: any) => {
         this.companyListData = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  async getTodayBookingDataList() {
+    this.api.getTodayBookingList()
+      .subscribe((res: any) => {
+        this.todayBookingListData = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+
+
+
+  async getBookingStatusDataList() {
+    this.api.getBookingStatusList()
+      .subscribe((res: any) => {
+        this.bookingStatusListData = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+
+  async getRoomTypeDataList() {
+    this.api.getRoomTypeList()
+      .subscribe((res: any) => {
+        this.roomTypeListData = res;
       }, err => {
         console.log(err);
       });

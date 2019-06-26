@@ -18,17 +18,16 @@
 
   .heading-data {
     font-family: sans-serif;
-    border: 2px solid #1F497D  !important;
-    
+    border: 1px solid #1F497D  !important; 
     border-radius: 5px;
-    padding: 15px;
+   
   }
   
   .heading-desc {
     background: #1F497D;
     color: #fff;
     padding: 5px 10px ;
-    font-size: 18;
+    font-size: 12px;
     font-weight: bold;
     border-radius: 5px;
     box-shadow: 0 0 0 5px #ddd;
@@ -68,5 +67,41 @@
     flex: .3;
    
   }
+
+  .column2{
+    flex: .2;
+   
+  }
+
+  .mat-focused .placeholder {
+    color: #FF4081;
+   // font-size: 17px !important;
+   
+}
+
+::ng-deep .mat-form-field-label{
+  color:rgb(196, 20, 20) !important;
+}
+
+  .placeholder{
+    font-size: 11px;
+    font-family: Verdana, Geneva, "Arial Narrow Bold";
+font-weight: 600;
+    
+    color: #1f497d;
+  }
+
+  .column1{
+    flex: .1;
+   
+  }
+
+  .column15{
+    flex: .15;
+  }
   
+  .column12{
+    flex: .12;
+   
+  }
   

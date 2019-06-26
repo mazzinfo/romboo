@@ -42,6 +42,19 @@ export class RestApiService {
     return this.http.get<any[]>(this.apiUrl + 'companyList').pipe(retry(1), catchError(this.handleError));
   }
 
+  getBookingStatusList(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'bookingStatusList').pipe(retry(1), catchError(this.handleError));
+  }
+
+  getRoomTypeList(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'roomTypeList').pipe(retry(1), catchError(this.handleError));
+  }
+
+
+  getTodayBookingList(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'todayBookingList').pipe(retry(1), catchError(this.handleError));
+  }
+
   getTotalRoomStatus(): Observable<any> {
     return this.http.get<any>(this.apiUrl + 'totalRoomStatus').pipe(retry(1), catchError(this.handleError));
   }

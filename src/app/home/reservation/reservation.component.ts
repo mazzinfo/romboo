@@ -13,26 +13,32 @@ import * as moment from 'moment';
 export class ReservationComponent implements OnInit {
   firstName: string;
   lastName: string;
+  regularGuest: string;
+  regularGuestNo: string;
   public momentDate: moment.Moment;
   
   bookingDate = moment();
   bookingFromDate = moment();
-  bookingToDate=moment().day(3);
+  bookingToDate=moment().add(1, 'days');
 
   bookingFromTime=moment().format("HH:mm");
   bookingToTime=moment().format("HH:mm");
 
+  fromMinDate= moment().add(-1, 'days');
+  toMinDate= moment().add(-1, 'days');
 
   columnDefs = [
-    {headerName: 'Guest Name', field: 'make' },
-    {headerName: 'Company Name', field: 'make' },
-    {headerName: 'Phone No', field: 'model' },
-    {headerName: 'From Date', field: 'price'},
-    {headerName: 'To Date', field: 'price'},
-    {headerName: 'Advance', field: 'price'},
-    {headerName: 'Booking Id', field: 'price'},
-    {headerName: 'Room Type', field: 'price'},
-    {headerName: 'No Of Pax', field: 'price'},
+    {headerName: 'Guest Name', field: 'guestName',sortable: true, filter: true },
+    {headerName: 'Company Name', field: 'debtorName',sortable: true, filter: true },
+    {headerName: 'Phone No', field: 'phone',sortable: true, filter: true },
+    {headerName: 'From Date', field: 'fromDate',sortable: true, filter: true},
+    {headerName: 'To Date', field: 'toDate',sortable: true, filter: true},
+    {headerName: 'Advance', field: 'amount',sortable: true, filter: true},
+    {headerName: 'Booking Id', field: 'price',sortable: true, filter: true},
+    {headerName: 'Room Type', field: 'roomType',sortable: true, filter: true},
+    {headerName: 'No Of Pax', field: 'pax',sortable: true, filter: true},
+    {headerName: 'Bill Instr', field: 'billinstr',sortable: true, filter: true},
+    {headerName: 'Address', field: 'address',sortable: true, filter: true },
 ];
 
 rowData = [
@@ -51,8 +57,12 @@ rowData = [
 
     this.firstName = 'Alec';
     this.lastName = 'Thompson';
+    this.regularGuest="no";
     this.restDataApiService.getGuestureDataList();
     this.restDataApiService.getCompanyDataList();
+    this.restDataApiService.getTodayBookingDataList();
+    this.restDataApiService.getBookingStatusDataList();
+    this.restDataApiService.getRoomTypeDataList();
   }
 
 }
