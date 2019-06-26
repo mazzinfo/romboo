@@ -1,10 +1,8 @@
 .action-menu-grid{
-margin-top: 2px;
+  margin-top: 2px;
     align-items: center;
     margin-left: 30%;
     margin-right: 30%;
- 
-   
 }
 
 
@@ -16,12 +14,7 @@ margin-top: 2px;
     font-family: Verdana, Geneva, 'Arial Narrow Bold', sans-serif;
     font-weight: bold;
     text-align: center;
-    align-items: center;
-
-
-    
-   
-   
+    align-items: center;   
   }
 
   .add {
@@ -85,35 +78,23 @@ padding: .9em;
     font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
-fieldset {
-  font-family: sans-serif;
-  border: 5px solid #1F497D;
-  background: #ddd;
-  border-radius: 5px;
-  padding: 15px;
-}
 
-fieldset legend {
-  background: #1F497D;
-  color: #fff;
-  padding: 5px 10px ;
-  font-size: 32px;
-  border-radius: 5px;
-  box-shadow: 0 0 0 5px #ddd;
-  margin-left: 20px;
-}
 
 
 
 .guest-label{
-  font-size: 12px;
+  font-size: 11px;
   font-family: Verdana, Geneva, "Arial Narrow Bold";
   font-weight: bolder;
-  margin-bottom: .3em;
+  margin-top: 2em;
+  margin-right: .5em;
+  color: #1f497d;
 }
 
 .guest-btn{
-  padding: 1px;
+  font-size: 11px;
+   padding: 2px;
+   margin-top: 1.7em;
 }
 .ngx-timepicker-fromtime {
   display: flex;
@@ -133,25 +114,28 @@ fieldset legend {
   flex-direction: column;
 
   border-radius: 3px;
-  padding: 1em;
-}
-.row {
-  display: flex;
-  justify-content: center;
+  padding: .4em;
 }
 
-.row1 {
-  display: flex;
-  justify-content: flex-start;
+.column-size1{
+  flex: 1;
 }
-.column {
-  display: flex;
-  flex-direction: column;
-  padding-top: .1em;
-  padding-right: 1em;
+
+
+
+.mat-input-element{
+  color:#3f51b5 !important;
 }
+
 .input-group {
    display: flex;
+}
+
+
+
+.input-group8 {
+  flex: .8;
+  
 }
 .input-group > label {
   margin-right: 1em; 

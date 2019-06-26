@@ -2,3 +2,71 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css"; 
 @import '~material-design-icons/iconfont/material-icons.css';
 
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+
+
+.row {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .row1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .heading-data {
+    font-family: sans-serif;
+    border: 2px solid #1F497D  !important;
+    
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  .heading-desc {
+    background: #1F497D;
+    color: #fff;
+    padding: 5px 10px ;
+    font-size: 18;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 0 0 5px #ddd;
+    margin-left: 20px;
+  }
+  .column {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding-top: .1em;  
+    padding-right: 1em;
+  }
+
+.column8{
+    flex: .8;
+   
+  }
+  .column7{
+    flex: .7;
+   
+  }
+  .column6{
+    flex: .6;
+   
+  }
+  .column5{
+    flex: .5;
+   
+  }
+  
+  .column4{
+    flex: .4;
+   
+  }
+  
+  .column3{
+    flex: .3;
+   
+  }
+  
+  

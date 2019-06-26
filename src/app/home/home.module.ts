@@ -10,11 +10,12 @@ import { DirtyComponent } from './dirty/dirty.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { FormsModule } from '@angular/forms';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [ DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent],
   imports: [
-    CommonModule,FormsModule,LayoutModule,MaterialModule,NgxMaterialTimepickerModule
+    CommonModule,FormsModule,LayoutModule,MaterialModule,NgxMaterialTimepickerModule,AgGridModule.withComponents([])
   ],
   exports:[CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,ReservationComponent]
 })

@@ -49,8 +49,8 @@
   </mat-grid-list>
 
   <form class="myForm">
-      <fieldset >
-          <legend>New Booking</legend>
+      <fieldset class="heading-data"   style="width: 96%;height: 30%;">
+          <legend class="heading-desc">New Booking</legend>
     <div class="row">
        
       <div class="column">
@@ -74,19 +74,6 @@
               </div>
 
          
-        <!-- <fieldset class="taxi">
-          <legend>Which taxi do you require?</legend>
-          <label> <input type="radio" id="taxi_car" value="car"> Car </label>
-          <label> <input type="radio" id="taxi_van" value="van"> Van </label>
-          <label> <input type="radio" id="taxi_tuk" value="tuktuk"> Tuk Tuk </label>
-        </fieldset>
-  
-        <fieldset class="extras">
-          <legend>Extras</legend>
-          <label> <input type="checkbox" id="extras_baby" value="baby"> Baby Seat </label>
-          <label> <input type="checkbox" id="extras_wheel" value="wheelchair"> Wheelchair Access </label>
-          <label> <input type="checkbox" id="extras_tip" value="tip"> Stock Tip </label>
-        </fieldset> -->
       </div>
 
       <div class="column">
@@ -134,18 +121,18 @@
     <div class="row1">
         <div class="column">
             <div class="input-group">
-          <div class="custom-mat-form-field">
+         
         <mat-label class="guest-label">Regular Guest  </mat-label>
         <mat-radio-group aria-label="Select an option">
           <mat-radio-button class="guest-btn" value="1">Yes</mat-radio-button>
           <mat-radio-button class="guest-btn" value="2">No</mat-radio-button>
         </mat-radio-group>
-        </div>
+      
         </div>
         </div>
         <div class="column">
             <div class="input-group">
-            <mat-form-field>
+            <mat-form-field color="accent">
                 <mat-label>Guesture</mat-label>
                 <mat-select>
                   <mat-option *ngFor="let guesture of restDataApiService.guestureListData" [value]="guesture.pcKey">
@@ -156,15 +143,152 @@
               </div>
 
         </div>
+        <div class="column">
+            <div class="input-group">
+        <mat-form-field color="accent">
+          <input matInput placeholder="Guest Name" value="">
+        </mat-form-field>
+</div>
+        </div>
+      
+        <div class="column">
+            <div class="input-group">
+            <mat-form-field color="accent">
+                <mat-label>Company Name</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let company of restDataApiService.companyListData" [value]="company.debtorCode">
+                    {{company.debtorName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
 
-
+        </div>
+        <div class="column">
+            <div class="input-group">
+            <mat-form-field color="accent">
+              <input matInput placeholder="City" value="">
+            </mat-form-field>
     </div>
+            </div>
+            
+       
+    </div>
+
+
+
+    <div class="row">
+        <div class="column">
+            <div class="input-group">
+            <mat-form-field color="accent">
+              <input matInput placeholder="Email Id" value="">
+            </mat-form-field>
+    </div>
+            </div>
+        <div class="column">
+            <div class="input-group">
+            <mat-form-field color="accent">
+                <mat-label>Booking Status</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let company of restDataApiService.companyListData" [value]="company.debtorCode">
+                    {{company.debtorName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
+
+        </div>
+
+        <div class="column">
+            <div class="input-group">
+            <mat-form-field color="accent">
+                <mat-label>Room Type</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let company of restDataApiService.companyListData" [value]="company.debtorCode">
+                    {{company.debtorName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
+        </div>
     
+                <div class="column">
+                    <div class="input-group">
+                    <mat-form-field color="accent">
+                      <input matInput placeholder="No. Of Rooms" value="">
+                    </mat-form-field>
+            </div>
+                    </div>
+                    <div class="column">
+                        <div class="input-group">
+                        <mat-form-field color="accent">
+                          <input matInput placeholder="Pax" value="">
+                        </mat-form-field>
+                </div>
+                        </div>
+                         
+        
+    </div>
+    <div class="row">
+
+        <div class="column">
+            <div class="input-group">
+            <mat-form-field color="accent">
+              <input matInput placeholder="Booking Id" value="">
+            </mat-form-field>
+    </div>
+            </div>
+        <div class="column ">
+            <div class="input-group">
+            <mat-form-field color="accent">
+              <input matInput placeholder="Instructions For" value="">
+            </mat-form-field>
+    </div>
+            </div>
+            <div class="column">
+                <div class="input-group">
+                <mat-form-field color="accent">
+                  <input matInput placeholder="Pickup Details" value="">
+                </mat-form-field>
+        </div>
+                </div>
+                <div class="column">
+                    <div class="input-group">
+                    <mat-form-field color="accent">
+                      <input matInput placeholder="Advance" value="">
+                    </mat-form-field>
+            </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="input-group">
+                            <button id="submit" style="background: green;">Save</button>
+                          </div>
+                          </div>
+    </div>
     <div class="row">
       
-      <button id="submit">Submit Booking</button>
+     
       
     </div>
 
     </fieldset>
   </form>
+  <div class="row">
+    
+      <fieldset class="heading-data"  style="width: 96%;height: 30%;">
+          <legend class="heading-desc">Today Booking</legend>
+          <div class="column column8">  
+            <ag-grid-angular 
+    style="width: 100%; height: 100px;" 
+    class="ag-theme-balham"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+    >
+   
+</ag-grid-angular>
+</div>
+
+</fieldset>
+
+</div>

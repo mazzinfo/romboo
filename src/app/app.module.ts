@@ -20,7 +20,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationComponent } from './home/reservation/reservation.component';
 import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
 import {MOMENT_DATE_FORMATS, MomentDateAdapter } from 'src/environments/environment';
-
+import { AgGridModule } from 'ag-grid-angular';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
@@ -38,6 +38,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatIconModule, 
     MatDialogModule,
     FormsModule,
+    AgGridModule.withComponents([]),
     HttpClientModule,
     NgxMaterialTimepickerModule,
     LayoutModule,
