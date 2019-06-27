@@ -58,7 +58,7 @@
 
           <div class="input-group">
           <mat-form-field color="accent">
-              <input matInput [matDatepicker]="bookingDatePicker" [(ngModel)]="bookingDate" name="bookingDate"  readonly>
+              <input matInput [matDatepicker]="bookingDatePicker" [(ngModel)]="bookingData.bookingDate" name="bookingData.bookingDate"  readonly>
               <mat-placeholder class="placeholder">Booking Date</mat-placeholder>
               <mat-datepicker-toggle matSuffix [for]="bookingDatePicker" readonly></mat-datepicker-toggle>
               <mat-datepicker #bookingDatePicker1></mat-datepicker>
@@ -69,7 +69,7 @@
       <div class="column">
           <div class="input-group">
               <mat-form-field color="accent">
-                  <input matInput [matDatepicker]="fromDatePicker" [(ngModel)]="bookingFromDate" [min]="fromMinDate" [max]="fromMaxDate" name="bookingFromDate" >
+                  <input matInput [matDatepicker]="fromDatePicker" [(ngModel)]="bookingData.bookingFromDate" [min]="fromMinDate" [max]="fromMaxDate" name="bookingData.bookingFromDate" >
                   <mat-placeholder class="placeholder">From Date</mat-placeholder>
                   <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
                   <mat-datepicker #fromDatePicker></mat-datepicker>
@@ -83,7 +83,7 @@
          
             <div class="input-group">
             <div class="ngx-timepicker-fromtime-field">
-                <ngx-timepicker-field class="ngx-timepicker-fromtime" [(ngModel)]="bookingFromTime" name="bookingFromTime" [toggleIcon]="icon"></ngx-timepicker-field>
+                <ngx-timepicker-field class="ngx-timepicker-fromtime" [(ngModel)]="bookingData.bookingFromTime" name="bookingData.bookingFromTime" [toggleIcon]="icon"></ngx-timepicker-field>
                 <ng-template #icon>
                     <i class="material-icons schedule">schedule</i>
                 </ng-template>
@@ -98,7 +98,7 @@
 
                  <div class="input-group">
               <mat-form-field color="accent">
-                  <input matInput [matDatepicker]="toDatePicker" [(ngModel)]="bookingToDate" [min]="toMinDate" [max]="toMaxDate" name="bookingToDate" >
+                  <input matInput [matDatepicker]="toDatePicker" [(ngModel)]="bookingData.bookingToDate" [min]="toMinDate" [max]="toMaxDate" name="bookingData.bookingToDate" >
                   <mat-placeholder class="placeholder">To Date</mat-placeholder>
                   <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
                   <mat-datepicker #toDatePicker></mat-datepicker>
@@ -110,7 +110,7 @@
          
                   <div class="input-group">
                   <div class="ngx-timepicker-fromtime-field">
-                      <ngx-timepicker-field class="ngx-timepicker-fromtime"  [(ngModel)]="bookingToTime" name="bookingToTime" [toggleIcon]="icon"></ngx-timepicker-field>
+                      <ngx-timepicker-field class="ngx-timepicker-fromtime"  [(ngModel)]="bookingData.bookingToTime" name="bookingData.bookingToTime" [toggleIcon]="icon"></ngx-timepicker-field>
                       <ng-template #icon>
                           <i class="material-icons schedule">schedule</i>
                       </ng-template>
@@ -127,7 +127,7 @@
             <div class="input-group">
          
         <mat-label class="guest-label">Regular Guest  </mat-label>
-        <mat-radio-group aria-label="Select an option" [(ngModel)]="regularGuest" name="regularGuest">
+        <mat-radio-group aria-label="Select an option" [(ngModel)]="bookingData.regularGuest" name="bookingData.regularGuest">
           <mat-radio-button class="guest-btn"   value="yes">Yes</mat-radio-button>
           <mat-radio-button class="guest-btn"  value="no">No</mat-radio-button>
         </mat-radio-group>
@@ -138,8 +138,8 @@
             <div class="input-group">
             <mat-form-field color="accent">
                 <mat-label class="placeholder">Guesture</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let guesture of restDataApiService.guestureListData" [value]="guesture.pcKey">
+                <mat-select [(ngModel)]="bookingData.guesture" name="bookingData.guesture">
+                  <mat-option  *ngFor="let guesture of restDataApiService.guestureListData" [value]="guesture.pcKey">
                     {{guesture.description}}
                   </mat-option>
                 </mat-select>
@@ -150,7 +150,7 @@
         <div class="column">
             <div class="input-group">
         <mat-form-field color="accent">
-          <input matInput  value="">
+          <input matInput id="input1"  [(ngModel)]="bookingData.guestName" name="bookingData.guestName" value="" (keydown)="checkGuestName()">
           <mat-placeholder class="placeholder">Guest Name</mat-placeholder>
         </mat-form-field>
 </div>
@@ -160,7 +160,7 @@
             <div class="input-group">
             <mat-form-field color="accent">
                 <mat-label class="placeholder">Company Name</mat-label>
-                <mat-select>
+                <mat-select  [(ngModel)]="bookingData.companyName" name="bookingData.companyName">
                   <mat-option *ngFor="let company of restDataApiService.companyListData" [value]="company.debtorCode">
                     {{company.debtorName}}
                   </mat-option>
@@ -172,7 +172,8 @@
         <div class="column">
             <div class="input-group">
             <mat-form-field color="accent">
-              <input matInput  value="">
+              <input matInput type="number" [(ngModel)]="bookingData.phoneNo" name="bookingData.phoneNo"  
+                  value="">
               <mat-placeholder class="placeholder">Phone No</mat-placeholder>
             </mat-form-field>
     </div>
@@ -188,7 +189,7 @@
         <div class="column">
             <div class="input-group">
             <mat-form-field color="accent">
-              <input matInput  value="">
+              <input matInput [(ngModel)]="bookingData.city" name="bookingData.city" value="">
               <mat-placeholder class="placeholder">City</mat-placeholder>
             </mat-form-field>
     </div>
@@ -196,7 +197,7 @@
         <div class="column">
             <div class="input-group">
             <mat-form-field color="accent">
-              <input matInput value="">
+              <input matInput [(ngModel)]="bookingData.emailId" name="bookingData.emailId" value="">
               <mat-placeholder class="placeholder">Email Id</mat-placeholder>
             </mat-form-field>
     </div>
@@ -205,8 +206,8 @@
             <div class="input-group">
             <mat-form-field color="accent">
                 <mat-label class="placeholder">Booking Status</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let bookingStatus of restDataApiService.bookingStatusListData" [value]="bookingStatus.arrivalCode">
+                <mat-select [(ngModel)]="bookingData.bookingStatus" name="bookingData.bookingStatus">
+                  <mat-option  *ngFor="let bookingStatus of restDataApiService.bookingStatusListData" [value]="bookingStatus.arrivalCode">
                     {{bookingStatus.description}}
                   </mat-option>
                 </mat-select>
@@ -219,8 +220,8 @@
             <div class="input-group">
             <mat-form-field color="accent">
                 <mat-label class="placeholder">Room Type</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let company of restDataApiService.roomTypeListData" [value]="company.roomTypeCode">
+                <mat-select [(ngModel)]="bookingData.roomType" name="bookingData.roomType">
+                  <mat-option  *ngFor="let company of restDataApiService.roomTypeListData" [value]="company.roomTypeCode">
                     {{company.typeName}}
                   </mat-option>
                 </mat-select>
@@ -231,7 +232,7 @@
                 <div class="column">
                     <div class="input-group">
                     <mat-form-field color="accent">
-                      <input matInput value="">
+                      <input matInput type="number" [(ngModel)]="bookingData.noOfRooms" name="bookingData.noOfRooms" value="">
                       <mat-placeholder class="placeholder">No. Of Rooms</mat-placeholder>
                     </mat-form-field>
             </div>
@@ -244,7 +245,7 @@
         <div class="column">
             <div class="input-group">
             <mat-form-field color="accent">
-              <input matInput  value="">
+              <input matInput type="number" [(ngModel)]="bookingData.pax" name="bookingData.pax" value="">
               <mat-placeholder class="placeholder">Pax</mat-placeholder>
             </mat-form-field>
     </div>
@@ -252,7 +253,7 @@
         <div class="column">
             <div class="input-group">
             <mat-form-field color="accent">
-              <input matInput  value="">
+              <input matInput  value="" [(ngModel)]="bookingData.bookingId" name="bookingData.bookingId">
               <mat-placeholder class="placeholder">Booking Id</mat-placeholder>
             </mat-form-field>
     </div>
@@ -260,7 +261,7 @@
         <div class="column ">
             <div class="input-group">
             <mat-form-field color="accent">
-              <input matInput  value="">
+              <input matInput  value="" [(ngModel)]="bookingData.instructionsFor" name="bookingData.instructionsFor">
               <mat-placeholder class="placeholder">Instructions For</mat-placeholder>
             </mat-form-field>
     </div>
@@ -268,7 +269,7 @@
             <div class="column">
                 <div class="input-group">
                 <mat-form-field color="accent">
-                  <input matInput  value="">
+                  <input matInput  value="" [(ngModel)]="bookingData.pickupDetails" name="bookingData.pickupDetails">
                   <mat-placeholder class="placeholder">Pickup Details</mat-placeholder>
                 </mat-form-field>
         </div>
@@ -276,7 +277,7 @@
                 <div class="column">
                     <div class="input-group">
                     <mat-form-field color="accent">
-                      <input matInput  value="">
+                      <input matInput type="number" value="" [(ngModel)]="bookingData.advance" name="bookingData.advance">
                       <mat-placeholder class="placeholder">Advance</mat-placeholder>
                       
                     </mat-form-field>
@@ -288,7 +289,7 @@
     <div class="row">
       
         <div class="column column12">
-      <button id="submit" style="background: green;color: white;font-weight: bold;border-radius: 10px;font-size: 11px">Save Booking</button>
+      <button id="submit" (click)="saveBooking();" style="background: green;color: white;font-weight: bold;border-radius: 10px;font-size: 11px">Save Booking</button>
       </div>
     </div>
 

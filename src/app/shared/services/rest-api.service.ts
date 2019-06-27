@@ -10,7 +10,7 @@ export class RestApiService {
 
   // apiUrl = 'http://192.168.1.6:8080/roomapi/';
 
-  apiUrl = 'http://192.168.1.5:8080/roomapi/';
+  apiUrl = 'http://192.168.1.2:8080/roomapi/';
 
   constructor(private http: HttpClient) {
 
@@ -46,6 +46,12 @@ export class RestApiService {
     return this.http.get<any[]>(this.apiUrl + 'bookingStatusList').pipe(retry(1), catchError(this.handleError));
   }
 
+  checkGuestList(guestName): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'checkGuest/'+guestName).pipe(retry(1), catchError(this.handleError));
+  }
+
+
+  
   getRoomTypeList(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'roomTypeList').pipe(retry(1), catchError(this.handleError));
   }
