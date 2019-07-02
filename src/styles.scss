@@ -6,10 +6,99 @@
 @import "~ag-grid-community/dist/styles/ag-theme-balham.css";
 
 
+body{
+
+  font-family: Verdana, Geneva, "Arial Narrow Bold" !important;
+}
+
+
 .row {
     display: flex;
     justify-content: center;
   }
+
+  .mat-dialog-container {
+    // padding-top: 0 !important;
+    // padding-left: 0 !important;
+    // padding-right: 0 !important;
+
+}
+
+.padding-right-10{
+  padding-right: 10px;
+}
+.error-dialog-row-body{
+
+  padding-top: 28px;
+  padding-right: 10px;
+  
+}
+
+.error-dialog-row-footer{
+float: right;
+}
+
+.dialog-row-header {
+  color: white !important;
+  background: #1f497d !important;
+  margin: -24px !important;
+  padding: 12px !important;
+  font-size: 14px;
+  display: -webkit-box;
+}
+.table-header{
+  padding: 6px;
+  font-size: 15px;
+
+  text-align: center;  
+  
+  width: 100%;
+}
+
+
+.table-header tr td{
+ 
+  font-size: 14px;
+  width: 100%;
+  border: 1px solid grey;
+}
+.table-column{
+  border: 1px solid grey;
+}
+
+.btn_add{
+  margin-top: 0.5em !important;
+}
+
+.del {
+  width: 30px;
+  height: 30px;
+}
+
+.del .mat-icon {
+    padding: 4px 0;
+    line-height: 22px;
+}
+
+
+.dialog-row-body{
+
+  margin-top: 18px !important;
+ 
+ 
+}
+
+
+
+.btn-save{
+  background: green;
+    color: white;
+}
+
+.btn-cancel{
+  background: orange;
+  color: white;
+}
   
   .row1 {
     display: flex;
@@ -17,7 +106,7 @@
   }
 
   .heading-data {
-    font-family: sans-serif;
+    // font-family: sans-serif;
     border: 1px solid #1F497D  !important; 
     border-radius: 5px;
    
@@ -38,7 +127,7 @@
     flex: 1;
     flex-direction: column;
     padding-top: .1em;  
-    padding-right: 1em;
+    padding-right: .1em;
   }
 
 .column8{
@@ -85,7 +174,7 @@
 
   .placeholder{
     font-size: 11px;
-    font-family: Verdana, Geneva, "Arial Narrow Bold";
+  //  font-family: Verdana, Geneva, "Arial Narrow Bold";
 font-weight: 600;
     
     color: #1f497d;

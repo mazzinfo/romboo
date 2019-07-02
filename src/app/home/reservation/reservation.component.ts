@@ -1,8 +1,11 @@
+import { SettlementComponent } from './../settlement/settlement.component';
 import { RestDataApiService } from './../../shared/services/rest-data-api.service';
 import { RestApiService } from './../../shared/services/rest-api.service';
 import { Component, OnInit, ViewChild, ElementRef, Inject, Renderer } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 
 
 @Component({
@@ -47,7 +50,7 @@ rowData = [
 ];
 
   constructor(public restDataApiService:RestDataApiService,public api: RestApiService,
-    private renderer: Renderer) {
+    private renderer: Renderer,public dialog: MatDialog) {
 
     
   
@@ -64,9 +67,91 @@ rowData = [
     this.restDataApiService.getBookingStatusDataList();
     this.restDataApiService.getRoomTypeDataList();
   }
-  saveBooking(){
-alert(this.bookingData.guesture);
+
+
+  
+  openSettlementDialog(advAmount){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      amount: advAmount,
+  };
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    const dialogRef = this.dialog.open(SettlementComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+        data => console.log("Dialog output:", data)
+    );    
+    
   }
+
+  openError(error){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      error: error,
+  };
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    const dialogRef = this.dialog.open(ErrorDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+        data => console.log("Dialog output:", data)
+    );    
+    
+  }
+
+ 
+
+  saveBooking(){
+if(this.bookingData.guesture==null || this.bookingData.guesture==''){
+  this.openError("Enter The Guesture");
+  
+}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
+ 
+}else if(this.bookingData.companyName==null || this.bookingData.companyName=='') {
+
+}else if(this.bookingData.phoneNo==null || this.bookingData.phoneNo=='' || this.bookingData.phoneNo=='0'){
+
+}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
+
+}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
+  
+}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
+  
+}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){  
+
+}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
+
+}else{
+  this.saveCheckGuestName();
+}
+//alert(this.bookingData.guesture);
+  }
+  saveCheckGuestName(){
+   
+    this.api.checkGuestList(this.bookingData.guestName)
+      .subscribe((res: any) => {
+       // alert("res.."+res);
+       if(res!==null){
+        alert("Guest Name Already Exist");
+        const element = this.renderer.selectRootElement('#input1');
+        element.focus()
+        
+       }else{
+         if(this.bookingData.advance!='' && this.bookingData.advance!=='0' ){
+          this.openSettlementDialog(this.bookingData.advance);
+         }else{
+alert("save");
+         }
+       
+       }
+      }, err => {
+        console.log(err);
+      });
+  
+
+
+}
+
+
   checkGuestName(){
    
       this.api.checkGuestList(this.bookingData.guestName)

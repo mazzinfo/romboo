@@ -1,0 +1,93 @@
+
+<div class="row dialog-row-header" >
+    <div class="column">
+        <div class="input-group padding-right-10">
+      <mat-label>Room Revenu :</mat-label> <mat-label> {{advanceAmount}} </mat-label>
+      </div>
+</div>
+
+<div class="column">
+    <div class="input-group">
+    <mat-label>Total Amount: </mat-label><mat-label>{{totalAmount}}</mat-label>
+    </div>
+</div>
+
+</div>
+
+<mat-dialog-content>
+<!-- <div class="row  dialog-row-body">
+    <div class="column">
+        <div class="input-group">
+            <mat-form-field color="accent">
+                <mat-label class="placeholder">Settle Type</mat-label>
+                <mat-select [(ngModel)]="newAttribute.name"  name="newAttributeName">
+                  <mat-option  *ngFor="let settle of restDataApiService.settleListData" [value]="settle.settleCode">
+                    {{settle.settleName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
+
+
+      </div>
+      <div class="column">
+          <div class="input-group">
+      <mat-form-field color="accent">
+        <input matInput id="input1" type="number"  id="newAttributeCode" [(ngModel)]="newAttribute.code" name="newAttributeCode"  value="" >
+        <mat-placeholder class="placeholder">Amount</mat-placeholder>
+      </mat-form-field>
+</div>
+      </div>
+      <div class="column">
+          <div class="input-group">
+          <button mat-icon-button class="btn_add" color="accent" (click)="addFieldValue()">
+              <mat-icon>add_circle_outline</mat-icon>
+             
+          </button>
+         </div>
+          </div>
+
+       </div> -->
+
+
+       <div class="row dialog-row-body">
+         <div class="column">
+       <table  class="table-header">
+          <thead >
+              <tr >
+                  <th >Settlement</th>
+                  <th>Amount</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let settle of restDataApiService.settleListData ; let i = index">
+                 
+                  <td>
+                    {{settle.settleName}}
+                     
+                      <!-- <input [(ngModel)]="field.name" class="form-control" type="text" name="{{field.name}}" /> -->
+                  </td>
+                  <td>
+                       <input [(ngModel)]="settle.amount1" type="number" (ngModelChange)="amoutChanged()" name="" /> 
+                      
+                                        </td>
+<div></div>
+              </tr>
+             
+          </tbody>
+      </table>
+      </div>
+      </div>
+      
+
+</mat-dialog-content>
+      <mat-dialog-actions>
+          <div class="row">
+              <div class="column">
+          <button mat-button [mat-dialog-close]="true"  class="btn-save" tabindex="1">Save</button>
+          </div>
+          <div class="column">
+          <button mat-button mat-dialog-close class="btn-cancel" tabindex="-1">Cancel</button>
+          </div>
+          </div>
+        </mat-dialog-actions>

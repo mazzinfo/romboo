@@ -19,9 +19,12 @@ import { DirtyComponent } from './home/dirty/dirty.component';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationComponent } from './home/reservation/reservation.component';
 import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
-import {MOMENT_DATE_FORMATS, MomentDateAdapter } from 'src/environments/environment';
+
 import { AgGridModule } from 'ag-grid-angular';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { MomentDateAdapter, MOMENT_DATE_FORMATS } from 'src/app/shared/Adapter/MomentDateAdapter'
+import { SettlementComponent } from './home/settlement/settlement.component';
+import { ErrorDialogComponent } from './home/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,8 +48,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     LoginFormModule,
     HomeModule
   ],
-  entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent],
-  providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},
+  entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,SettlementComponent,ErrorDialogComponent],
+  providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},MomentDateAdapter,
     {provide: DateAdapter, useClass: MomentDateAdapter}],
   bootstrap: [AppComponent]
 })

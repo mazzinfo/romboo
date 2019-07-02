@@ -61,7 +61,7 @@
               <input matInput [matDatepicker]="bookingDatePicker" [(ngModel)]="bookingData.bookingDate" name="bookingData.bookingDate"  readonly>
               <mat-placeholder class="placeholder">Booking Date</mat-placeholder>
               <mat-datepicker-toggle matSuffix [for]="bookingDatePicker" readonly></mat-datepicker-toggle>
-              <mat-datepicker #bookingDatePicker1></mat-datepicker>
+              <mat-datepicker #bookingDatePicker></mat-datepicker>
             </mat-form-field>
           </div>
 
@@ -69,7 +69,7 @@
       <div class="column">
           <div class="input-group">
               <mat-form-field color="accent">
-                  <input matInput [matDatepicker]="fromDatePicker" [(ngModel)]="bookingData.bookingFromDate" [min]="fromMinDate" [max]="fromMaxDate" name="bookingData.bookingFromDate" >
+                  <input matInput [matDatepicker]="fromDatePicker" [(ngModel)]="bookingData.bookingFromDate" [min]="fromMinDate"  name="bookingData.bookingFromDate" >
                   <mat-placeholder class="placeholder">From Date</mat-placeholder>
                   <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
                   <mat-datepicker #fromDatePicker></mat-datepicker>
@@ -95,10 +95,10 @@
 
 
               <div  class="column">
-
+                <!-- [max]="toMaxDate" -->
                  <div class="input-group">
               <mat-form-field color="accent">
-                  <input matInput [matDatepicker]="toDatePicker" [(ngModel)]="bookingData.bookingToDate" [min]="toMinDate" [max]="toMaxDate" name="bookingData.bookingToDate" >
+                  <input matInput [matDatepicker]="toDatePicker" [(ngModel)]="bookingData.bookingToDate" [min]="toMinDate" name="bookingData.bookingToDate" >
                   <mat-placeholder class="placeholder">To Date</mat-placeholder>
                   <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
                   <mat-datepicker #toDatePicker></mat-datepicker>

@@ -11,9 +11,11 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
+import { SettlementComponent } from './settlement/settlement.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 @NgModule({
-  declarations: [ DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent],
+  declarations: [ DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent, SettlementComponent, ErrorDialogComponent],
   imports: [
     CommonModule,FormsModule,LayoutModule,MaterialModule,NgxMaterialTimepickerModule,AgGridModule.withComponents([])
   ],
