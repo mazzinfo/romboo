@@ -81,13 +81,14 @@
       
 
 </mat-dialog-content>
-      <mat-dialog-actions>
+      <mat-dialog-actions class="error-dialog-row-footer">
           <div class="row">
-              <div class="column">
-          <button mat-button [mat-dialog-close]="true"  class="btn-save" tabindex="1">Save</button>
-          </div>
+              
           <div class="column">
           <button mat-button mat-dialog-close class="btn-cancel" tabindex="-1">Cancel</button>
           </div>
+          <div class="column">
+            <button mat-button [mat-dialog-close]="true"  class="btn-save" tabindex="1">Save</button>
+            </div>  
           </div>
         </mat-dialog-actions>

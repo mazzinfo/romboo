@@ -150,7 +150,7 @@
         <div class="column">
             <div class="input-group">
         <mat-form-field color="accent">
-          <input matInput id="input1"  [(ngModel)]="bookingData.guestName" name="bookingData.guestName" value="" (keydown)="checkGuestName()">
+          <input matInput id="input1"  [(ngModel)]="bookingData.guestName" name="bookingData.guestName" value="" (change)="checkGuestName()">
           <mat-placeholder class="placeholder">Guest Name</mat-placeholder>
         </mat-form-field>
 </div>

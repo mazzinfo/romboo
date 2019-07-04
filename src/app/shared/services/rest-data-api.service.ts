@@ -31,6 +31,16 @@ export class RestDataApiService {
       });
   }
 
+  async saveReservationData(bookingData) {
+    this.api.saveReservation(bookingData)
+      .subscribe((res: any[]) => {
+       
+      }, err => {
+        console.log(err);
+      });
+  }
+
+
   async getSettleList() {
     this.api.getSettleList()
       .subscribe((res: any[]) => {

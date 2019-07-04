@@ -22,7 +22,7 @@ export class ReservationComponent implements OnInit {
   bookingData={ 
   bookingDate: moment(),bookingFromDate : moment(),bookingToDate:moment().add(1, 'days'),bookingFromTime:moment().format("HH:mm"),
   bookingToTime:moment().format("HH:mm"),regularGuest: '', regularGuestNo: '', guesture: '', guestName:'', companyName:'',phoneNo:'', 
-  city:'', emailId:'', bookingStatus:'', roomType:'', noOfRooms:'',pax:'',bookingId:'',instructionsFor:'',pickupDetails:'',advance:'',
+  city:'', emailId:'', bookingStatus:'', roomType:'', noOfRooms:'',pax:'',bookingId:'',instructionsFor:'',pickupDetails:'',advance:'',settleList:''
   }
 
 
@@ -79,7 +79,11 @@ rowData = [
     dialogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(SettlementComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-        data => console.log("Dialog output:", data)
+     
+        data => {  this.bookingData.settleList=this.restDataApiService.settleListData; 
+          this.restDataApiService.saveReservationData(this.bookingData);
+          console.log("Dialog output:",  );
+    }
     );    
     
   }
@@ -102,24 +106,25 @@ rowData = [
 
   saveBooking(){
 if(this.bookingData.guesture==null || this.bookingData.guesture==''){
-  this.openError("Enter The Guesture");
+  this.openError("Choose Guesture!");
   
 }else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
+  this.openError("Enter The Guest Name!");
  
-}else if(this.bookingData.companyName==null || this.bookingData.companyName=='') {
+}else if(  this.bookingData.companyName!='0') {
+ 
+  this.openError("Choose Company Name!");
 
 }else if(this.bookingData.phoneNo==null || this.bookingData.phoneNo=='' || this.bookingData.phoneNo=='0'){
-
-}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
-
-}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
-  
-}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
-  
-}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){  
-
-}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
-
+  this.openError("Enter The Phone!");
+}else if(this.bookingData.bookingStatus==null || this.bookingData.bookingStatus==''){
+  this.openError("Choose Booking Status!");
+}else if(this.bookingData.roomType==null || this.bookingData.roomType==''){
+  this.openError("Choose RoomType");
+}else if(this.bookingData.noOfRooms==null || this.bookingData.noOfRooms=='' || this.bookingData.noOfRooms=='0'){
+  this.openError("Enter The Rooms");
+}else if(this.bookingData.pax==null || this.bookingData.pax==''  || this.bookingData.pax=='0'){  
+  this.openError("Enter The Pax");
 }else{
   this.saveCheckGuestName();
 }
@@ -139,7 +144,9 @@ if(this.bookingData.guesture==null || this.bookingData.guesture==''){
          if(this.bookingData.advance!='' && this.bookingData.advance!=='0' ){
           this.openSettlementDialog(this.bookingData.advance);
          }else{
-alert("save");
+          this.bookingData.settleList=this.restDataApiService.settleListData; 
+          this.restDataApiService.saveReservationData(this.bookingData);
+//alert("save");
          }
        
        }
