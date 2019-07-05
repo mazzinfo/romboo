@@ -8,6 +8,7 @@ export class RestDataApiService {
 
   public currentRoomData: any = [];
   public guestureListData: any = [];
+  public guestListData: any = [];
   public companyListData: any = [];
   public todayBookingListData: any = [];
   public bookingStatusListData: any = [];
@@ -55,6 +56,15 @@ export class RestDataApiService {
     this.api.getGuestureList()
       .subscribe((res: any) => {
         this.guestureListData = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  async getGuestDataList() {
+    this.api.getGuestList()
+      .subscribe((res: any) => {
+        this.guestListData = res;
       }, err => {
         console.log(err);
       });

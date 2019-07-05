@@ -50,8 +50,8 @@
   </mat-grid-list>
 </header>
   <form class="myForm">
-      <fieldset class="heading-data"   style="width: 96%;height: 30%;">
-          <legend class="heading-desc">New Booking</legend>
+      <fieldset class="heading-data"   style="width: 96%;height: 70%;">
+          <legend class="heading-desc">Booking</legend>
     <div class="row">
        
       <div class="column">
@@ -127,7 +127,7 @@
             <div class="input-group">
          
         <mat-label class="guest-label">Regular Guest  </mat-label>
-        <mat-radio-group aria-label="Select an option" [(ngModel)]="bookingData.regularGuest" name="bookingData.regularGuest">
+        <mat-radio-group required aria-label="Select an option" [(ngModel)]="bookingData.regularGuest" (change)="guestChange()" name="bookingData.regularGuest">
           <mat-radio-button class="guest-btn"   value="yes">Yes</mat-radio-button>
           <mat-radio-button class="guest-btn"  value="no">No</mat-radio-button>
         </mat-radio-group>
@@ -137,8 +137,8 @@
         <div class="column">
             <div class="input-group">
             <mat-form-field color="accent">
-                <mat-label class="placeholder">Guesture</mat-label>
-                <mat-select [(ngModel)]="bookingData.guesture" name="bookingData.guesture">
+                <mat-label class="placeholder"  >Guesture</mat-label>
+                <mat-select [(ngModel)]="bookingData.guesture" name="bookingData.guesture" required>
                   <mat-option  *ngFor="let guesture of restDataApiService.guestureListData" [value]="guesture.pcKey">
                     {{guesture.description}}
                   </mat-option>
@@ -147,12 +147,31 @@
               </div>
 
         </div>
+
         <div class="column">
             <div class="input-group">
-        <mat-form-field color="accent">
-          <input matInput id="input1"  [(ngModel)]="bookingData.guestName" name="bookingData.guestName" value="" (change)="checkGuestName()">
+        <mat-form-field color="accent" *ngIf="newGuest">
+          <input matInput id="input1" required  [(ngModel)]="bookingData.guestName" name="bookingData.guestName" value="" (change)="checkGuestName()">
           <mat-placeholder class="placeholder">Guest Name</mat-placeholder>
         </mat-form-field>
+
+        <mat-form-field *ngIf="oldGuest">
+          <input type="text" required  aria-label="Number"  [(ngModel)]="bookingData.guestName" name="bookingData.guestName" matInput   [matAutocomplete]="usersComp" >
+          <mat-placeholder class="placeholder">Search Guest</mat-placeholder>
+          <mat-autocomplete #usersComp="matAutocomplete" >
+            <mat-option *ngFor="let bookingData of restDataApiService.guestListData | async" [value]="bookingData.guestName">
+              {{bookingData.guestName}}
+            </mat-option>
+          </mat-autocomplete>
+
+         
+
+
+        </mat-form-field>
+
+
+        
+
 </div>
         </div>
       
@@ -160,7 +179,7 @@
             <div class="input-group">
             <mat-form-field color="accent">
                 <mat-label class="placeholder">Company Name</mat-label>
-                <mat-select  [(ngModel)]="bookingData.companyName" name="bookingData.companyName">
+                <mat-select required [(ngModel)]="bookingData.companyName" name="bookingData.companyName">
                   <mat-option *ngFor="let company of restDataApiService.companyListData" [value]="company.debtorCode">
                     {{company.debtorName}}
                   </mat-option>
@@ -173,7 +192,7 @@
             <div class="input-group">
             <mat-form-field color="accent">
               <input matInput type="number" [(ngModel)]="bookingData.phoneNo" name="bookingData.phoneNo"  
-                  value="">
+              required>
               <mat-placeholder class="placeholder">Phone No</mat-placeholder>
             </mat-form-field>
     </div>
@@ -206,7 +225,7 @@
             <div class="input-group">
             <mat-form-field color="accent">
                 <mat-label class="placeholder">Booking Status</mat-label>
-                <mat-select [(ngModel)]="bookingData.bookingStatus" name="bookingData.bookingStatus">
+                <mat-select [(ngModel)]="bookingData.bookingStatus" name="bookingData.bookingStatus" required>
                   <mat-option  *ngFor="let bookingStatus of restDataApiService.bookingStatusListData" [value]="bookingStatus.arrivalCode">
                     {{bookingStatus.description}}
                   </mat-option>
@@ -220,7 +239,7 @@
             <div class="input-group">
             <mat-form-field color="accent">
                 <mat-label class="placeholder">Room Type</mat-label>
-                <mat-select [(ngModel)]="bookingData.roomType" name="bookingData.roomType">
+                <mat-select [(ngModel)]="bookingData.roomType" name="bookingData.roomType" required>
                   <mat-option  *ngFor="let company of restDataApiService.roomTypeListData" [value]="company.roomTypeCode">
                     {{company.typeName}}
                   </mat-option>
@@ -232,7 +251,7 @@
                 <div class="column">
                     <div class="input-group">
                     <mat-form-field color="accent">
-                      <input matInput type="number" [(ngModel)]="bookingData.noOfRooms" name="bookingData.noOfRooms" value="">
+                      <input matInput type="number" [(ngModel)]="bookingData.noOfRooms" name="bookingData.noOfRooms" required>
                       <mat-placeholder class="placeholder">No. Of Rooms</mat-placeholder>
                     </mat-form-field>
             </div>
@@ -245,7 +264,7 @@
         <div class="column">
             <div class="input-group">
             <mat-form-field color="accent">
-              <input matInput type="number" [(ngModel)]="bookingData.pax" name="bookingData.pax" value="">
+              <input matInput type="number" [(ngModel)]="bookingData.pax" name="bookingData.pax" required>
               <mat-placeholder class="placeholder">Pax</mat-placeholder>
             </mat-form-field>
     </div>
@@ -289,17 +308,14 @@
     <div class="row">
       
         <div class="column column12">
-      <button id="submit" (click)="saveBooking();" style="background: green;color: white;font-weight: bold;border-radius: 10px;font-size: 11px">Save Booking</button>
+      <button id="submit" (click)="saveBooking();" class="submit-btn" >Save Booking</button>
       </div>
     </div>
-
-    </fieldset>
-  </form>
-  <div class="row">
+    <div class="row">
     
-      <fieldset class="heading-data"  style="width: 96%;height: 30%;">
+      <fieldset class="heading-data"  style="width: 99%;height: 30%;">
           <legend class="heading-desc">Today Booking</legend>
-          <div class="column column8">  
+          <div class="column">  
             <ag-grid-angular 
     style="width: 100%; height: 250px;" 
     class="ag-theme-balham"
@@ -313,3 +329,9 @@
 </fieldset>
 
 </div>
+
+
+    </fieldset>
+    
+  </form>
+  

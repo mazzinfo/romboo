@@ -38,6 +38,11 @@ export class RestApiService {
     return this.http.get<any[]>(this.apiUrl + 'guestureList').pipe(retry(1), catchError(this.handleError));
   }
 
+
+  getGuestList(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + 'guestList').pipe(retry(1), catchError(this.handleError));
+  }
+
   
   getSettleList(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'settleList').pipe(retry(1), catchError(this.handleError));

@@ -14,14 +14,16 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent implements OnInit {
-  firstName: string;
-  lastName: string;
+
+
+  newGuest=true;
+  oldGuest=false;
 
  
   public momentDate: moment.Moment;
   bookingData={ 
   bookingDate: moment(),bookingFromDate : moment(),bookingToDate:moment().add(1, 'days'),bookingFromTime:moment().format("HH:mm"),
-  bookingToTime:moment().format("HH:mm"),regularGuest: '', regularGuestNo: '', guesture: '', guestName:'', companyName:'',phoneNo:'', 
+  bookingToTime:moment().format("HH:mm"),regularGuest: '', regularGuestNo: '', guesture: '',guestId:'', guestName:'', companyName:'',phoneNo:'', 
   city:'', emailId:'', bookingStatus:'', roomType:'', noOfRooms:'',pax:'',bookingId:'',instructionsFor:'',pickupDetails:'',advance:0,settleList:''
   }
 
@@ -58,17 +60,28 @@ rowData = [
 
   ngOnInit() {
 
-    this.firstName = 'Alec';
-    this.lastName = 'Thompson';
+    
     this.bookingData.regularGuest="no";
     this.restDataApiService.getGuestureDataList();
+    this.restDataApiService.getGuestDataList();
     this.restDataApiService.getCompanyDataList();
     this.restDataApiService.getTodayBookingDataList();
     this.restDataApiService.getBookingStatusDataList();
     this.restDataApiService.getRoomTypeDataList();
   }
 
+  guestChange(){
 
+    if(this.bookingData.regularGuest==='yes'){
+
+      this.oldGuest=true;
+      this.newGuest=false;
+
+    }else{
+      this.oldGuest=false;
+      this.newGuest=true;
+    }
+  }
   
   openSettlementDialog(advAmount){
     const dialogConfig = new MatDialogConfig();
