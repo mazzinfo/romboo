@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogConfig } from '@angular/material/dialog';
 
 
 import { DirtyComponent } from './home/dirty/dirty.component';
@@ -49,7 +49,7 @@ import { ErrorDialogComponent } from './home/error-dialog/error-dialog.component
     HomeModule
   ],
   entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,SettlementComponent,ErrorDialogComponent],
-  providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},MomentDateAdapter,
+  providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},MomentDateAdapter,MatDialogConfig,
     {provide: DateAdapter, useClass: MomentDateAdapter}],
   bootstrap: [AppComponent]
 })

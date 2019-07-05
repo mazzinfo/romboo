@@ -22,7 +22,7 @@ export class ReservationComponent implements OnInit {
   bookingData={ 
   bookingDate: moment(),bookingFromDate : moment(),bookingToDate:moment().add(1, 'days'),bookingFromTime:moment().format("HH:mm"),
   bookingToTime:moment().format("HH:mm"),regularGuest: '', regularGuestNo: '', guesture: '', guestName:'', companyName:'',phoneNo:'', 
-  city:'', emailId:'', bookingStatus:'', roomType:'', noOfRooms:'',pax:'',bookingId:'',instructionsFor:'',pickupDetails:'',advance:'',settleList:''
+  city:'', emailId:'', bookingStatus:'', roomType:'', noOfRooms:'',pax:'',bookingId:'',instructionsFor:'',pickupDetails:'',advance:0,settleList:''
   }
 
 
@@ -79,10 +79,13 @@ rowData = [
     dialogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(SettlementComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-     
-        data => {  this.bookingData.settleList=this.restDataApiService.settleListData; 
+        data => {  
+          
+          if(data==true ){
+          this.bookingData.settleList=this.restDataApiService.settleListData; 
           this.restDataApiService.saveReservationData(this.bookingData);
-          console.log("Dialog output:",  );
+          }
+          console.log("Dialog output:", data );
     }
     );    
     
@@ -139,9 +142,9 @@ if(this.bookingData.guesture==null || this.bookingData.guesture==''){
         alert("Guest Name Already Exist");
         const element = this.renderer.selectRootElement('#input1');
         element.focus()
-        
+          
        }else{
-         if(this.bookingData.advance!='' && this.bookingData.advance!=='0' ){
+         if(this.bookingData.advance!==null && this.bookingData.advance!==0 ){
           this.openSettlementDialog(this.bookingData.advance);
          }else{
           this.bookingData.settleList=this.restDataApiService.settleListData; 

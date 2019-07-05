@@ -1,6 +1,6 @@
 import { RestDataApiService } from './../../shared/services/rest-data-api.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
 
 @Component({
   selector: 'app-settlement',
@@ -13,6 +13,7 @@ export class SettlementComponent implements OnInit {
   settleAmount:number;
   advanceAmount:number;
   totalAmount:number=0;
+  saveBlock=false;
   public settleListDatas: any = [];
 
   private fieldArray: Array<any> = [];
@@ -25,18 +26,29 @@ export class SettlementComponent implements OnInit {
 
     this.totalAmount=0;
     
-for(var i=0 ;i <=this.restDataApiService. settleListData.length;i++){
-  this.restDataApiService. settleListData[i].amount1  
+for(var i=0 ;i <this.restDataApiService. settleListData.length;i++){
     this.totalAmount =this.totalAmount+ this.restDataApiService. settleListData[i].amount1;
 
-}    
+}  
+
+
+if(this.advanceAmount== this.totalAmount){
+  this.saveBlock=true;
+  
+}else{
+  this.saveBlock=false;
+}
   }
 
-  constructor(public restDataApiService: RestDataApiService,@Inject(MAT_DIALOG_DATA) public data: any) { 
+  constructor(public restDataApiService: RestDataApiService,@Inject(MAT_DIALOG_DATA) public data: any,
+  
+  public dialogRef: MatDialogConfig<SettlementComponent>) { 
 
 this.advanceAmount=data.amount;
 
   }
+
+  
 
   ngOnInit() {
     this.restDataApiService.getSettleList();
