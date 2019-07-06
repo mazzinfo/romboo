@@ -13,9 +13,10 @@ import { FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 import { SettlementComponent } from './settlement/settlement.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { BookingListComponent } from './booking-list/booking-list.component';
 
 @NgModule({
-  declarations: [ DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent, SettlementComponent, ErrorDialogComponent],
+  declarations: [ DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent, SettlementComponent, ErrorDialogComponent, BookingListComponent],
   imports: [
     CommonModule,FormsModule,LayoutModule,MaterialModule,NgxMaterialTimepickerModule,AgGridModule.withComponents([])
   ],

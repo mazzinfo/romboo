@@ -1,0 +1,27 @@
+<div class="row dialog-row-header" >
+  <div class="column">
+      <div class="input-group">
+    <mat-label>Booking List</mat-label>
+    </div>
+</div>
+
+<div class="column column8">
+  <div class="input-group">
+<mat-label>Booking List</mat-label>
+</div>
+</div>
+</div>
+<mat-dialog-content >
+  <div class="row error-dialog-row-body">
+    <div class="column"> 
+        <ag-grid-angular 
+style="width: 100%; height: 350px;" 
+class="ag-theme-balham"
+[rowData]="restDataApiService.bookingListData" 
+[columnDefs]="columnDefs">
+
+</ag-grid-angular>
+</div>
+</div>
+
+</mat-dialog-content>

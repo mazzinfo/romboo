@@ -6,6 +6,7 @@ import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { BookingListComponent } from '../booking-list/booking-list.component';
 
 
 @Component({
@@ -16,52 +17,57 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 export class ReservationComponent implements OnInit {
 
 
-  newGuest=true;
-  oldGuest=false;
+  newGuest = true;
+  oldGuest = false;
 
- 
+
   public momentDate: moment.Moment;
-  bookingData={ 
-  bookingDate: moment(),bookingFromDate : moment(),bookingToDate:moment().add(1, 'days'),bookingFromTime:moment().format("HH:mm"),
-  bookingToTime:moment().format("HH:mm"),regularGuest: '', regularGuestNo: '', guesture: '',guestId:'', guestName:'', companyName:'',phoneNo:'', 
-  city:'', emailId:'', bookingStatus:'', roomType:'', noOfRooms:'',pax:'',bookingId:'',instructionsFor:'',pickupDetails:'',advance:0,settleList:''
+  bookingData = {
+    bookingDate: moment(), bookingFromDate: moment(), bookingToDate: moment().add(1, 'days'), bookingFromTime: moment().format("HH:mm"),
+    bookingToTime: moment().format("HH:mm"), regularGuest: '', regularGuestNo: '', guesture: '', guestId: '', guestName: '', companyName: '', phoneNo: '',
+    city: '', emailId: '', bookingStatus: '', roomType: '', noOfRooms: '', pax: '', bookingId: '', instructionsFor: '', pickupDetails: '', advance: 0, settleList: ''
   }
 
 
-  fromMinDate= moment().add(-1, 'days');
-  toMinDate= moment().add(-1, 'days');
+  fromMinDate = moment().add(-1, 'days');
+  toMinDate = moment().add(-1, 'days');
 
   columnDefs = [
-    {headerName: 'Guest Name', field: 'guestName',sortable: true, filter: true },
-    {headerName: 'Company Name', field: 'debtorName',sortable: true, filter: true },
-    {headerName: 'Phone No', field: 'phone',sortable: true, filter: true },
-    {headerName: 'From Date', field: 'fromDate',sortable: true, filter: true},
-    {headerName: 'To Date', field: 'toDate',sortable: true, filter: true},
-    {headerName: 'Advance', field: 'amount',sortable: true, filter: true},
-    {headerName: 'Booking Id', field: 'price',sortable: true, filter: true},
-    {headerName: 'Room Type', field: 'roomType',sortable: true, filter: true},
-    {headerName: 'No Of Pax', field: 'pax',sortable: true, filter: true},
-    {headerName: 'Bill Instr', field: 'billinstr',sortable: true, filter: true},
-    {headerName: 'Address', field: 'address',sortable: true, filter: true },
-];
+    {
+      displayName: 'Actions', cellTemplate:
+        '<div class="grid-action-cell">' +
+        '<a (click)="deleteThisRow(row.entity);" >Delete</a></div>'
+    },
+    { headerName: 'Guest Name', field: 'guestName', sortable: true, filter: true },
+    { headerName: 'Company Name', field: 'debtorName', sortable: true, filter: true },
+    { headerName: 'Phone No', field: 'phone', sortable: true, filter: true },
+    { headerName: 'From Date', field: 'fromDate', sortable: true, filter: true },
+    { headerName: 'To Date', field: 'toDate', sortable: true, filter: true },
+    { headerName: 'Advance', field: 'amount', sortable: true, filter: true },
+    { headerName: 'Booking Id', field: 'price', sortable: true, filter: true },
+    { headerName: 'Room Type', field: 'roomType', sortable: true, filter: true },
+    { headerName: 'No Of Pax', field: 'pax', sortable: true, filter: true },
+    { headerName: 'Bill Instr', field: 'billinstr', sortable: true, filter: true },
+    { headerName: 'Address', field: 'address', sortable: true, filter: true },
+  ];
 
-rowData = [
+  rowData = [
     // { make: 'Dlx', model: 'Celica', price: 35000 },
     // { make: 'Ford', model: 'Mondeo', price: 32000 },
     // { make: 'Porsche', model: 'Boxter', price: 72000 }
-];
+  ];
 
-  constructor(public restDataApiService:RestDataApiService,public api: RestApiService,
-    private renderer: Renderer,public dialog: MatDialog) {
+  constructor(public restDataApiService: RestDataApiService, public api: RestApiService,
+    private renderer: Renderer, public dialog: MatDialog) {
 
-    
-  
-   }
+
+
+  }
 
   ngOnInit() {
 
-    
-    this.bookingData.regularGuest="no";
+
+    this.bookingData.regularGuest = "no";
     this.restDataApiService.getGuestureDataList();
     this.restDataApiService.getGuestDataList();
     this.restDataApiService.getCompanyDataList();
@@ -70,128 +76,189 @@ rowData = [
     this.restDataApiService.getRoomTypeDataList();
   }
 
-  guestChange(){
+  guestChange() {
 
-    if(this.bookingData.regularGuest==='yes'){
+    if (this.bookingData.regularGuest === 'yes') {
 
-      this.oldGuest=true;
-      this.newGuest=false;
+      this.oldGuest = true;
+      this.newGuest = false;
+      this.clearGuestform();
 
-    }else{
-      this.oldGuest=false;
-      this.newGuest=true;
+    } else {
+      this.oldGuest = false;
+      this.newGuest = true;
+      this.clearGuestform();
     }
   }
-  
-  openSettlementDialog(advAmount){
+
+  clearGuestform() {
+    this.bookingData.guestId = '';
+    this.bookingData.guestName = '';
+    this.bookingData.companyName = '';
+    this.bookingData.guesture = '';
+    this.bookingData.phoneNo = '';
+    this.bookingData.city = '';
+    this.bookingData.emailId = '';
+    this.bookingData.instructionsFor = '';
+  }
+
+  getguesture: any = [];
+  guestSelect(guestData) {
+
+    this.getguesture = this.restDataApiService.guestureListData.filter(x => x.description === guestData.mrMrs);
+
+
+    this.bookingData.guestId = guestData.guestId;
+    this.bookingData.companyName = guestData.grpCode;
+    this.bookingData.guesture = this.getguesture[0].pcKey;
+
+    this.bookingData.phoneNo = guestData.phone;
+    this.bookingData.city = guestData.city;
+    this.bookingData.emailId = guestData.email;
+    this.bookingData.instructionsFor = guestData.billInstr;
+
+  }
+
+  openSettlementDialog(advAmount) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       amount: advAmount,
-  };
+    };
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(SettlementComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-        data => {  
-          
-          if(data==true ){
-          this.bookingData.settleList=this.restDataApiService.settleListData; 
+      data => {
+
+        if (data == true) {
+          this.bookingData.settleList = this.restDataApiService.settleListData;
           this.restDataApiService.saveReservationData(this.bookingData);
-          }
-          console.log("Dialog output:", data );
-    }
-    );    
-    
+        }
+        console.log("Dialog output:", data);
+      }
+    );
+
   }
 
-  openError(error){
+
+  openBookingList() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+
+    };
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height='50%';
+    dialogConfig.width='100%';
+
+    const dialogRef = this.dialog.open(BookingListComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+
+        console.log("Dialog output:", data);
+      }
+    );
+
+  }
+
+
+
+  openError(error) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       error: error,
-  };
+    };
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(ErrorDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-        data => console.log("Dialog output:", data)
-    );    
-    
+      data => console.log("Dialog output:", data)
+    );
+
   }
 
- 
 
-  saveBooking(){
-if(this.bookingData.guesture==null || this.bookingData.guesture==''){
-  this.openError("Choose Guesture!");
-  
-}else if(this.bookingData.guestName==null || this.bookingData.guestName==''){
-  this.openError("Enter The Guest Name!");
- 
-}else if(  this.bookingData.companyName!='0') {
- 
-  this.openError("Choose Company Name!");
 
-}else if(this.bookingData.phoneNo==null || this.bookingData.phoneNo=='' || this.bookingData.phoneNo=='0'){
-  this.openError("Enter The Phone!");
-}else if(this.bookingData.bookingStatus==null || this.bookingData.bookingStatus==''){
-  this.openError("Choose Booking Status!");
-}else if(this.bookingData.roomType==null || this.bookingData.roomType==''){
-  this.openError("Choose RoomType");
-}else if(this.bookingData.noOfRooms==null || this.bookingData.noOfRooms=='' || this.bookingData.noOfRooms=='0'){
-  this.openError("Enter The Rooms");
-}else if(this.bookingData.pax==null || this.bookingData.pax==''  || this.bookingData.pax=='0'){  
-  this.openError("Enter The Pax");
-}else{
-  this.saveCheckGuestName();
-}
-//alert(this.bookingData.guesture);
+  saveBooking() {
+    if (this.bookingData.guesture == null || this.bookingData.guesture == '') {
+      this.openError("Choose Guesture!");
+
+    } else if (this.bookingData.guestName == null || this.bookingData.guestName == '') {
+      this.openError("Enter The Guest Name!");
+
+    } else if (this.bookingData.companyName != '0') {
+
+      this.openError("Choose Company Name!");
+
+    } else if (this.bookingData.phoneNo == null || this.bookingData.phoneNo == '' || this.bookingData.phoneNo == '0') {
+      this.openError("Enter The Phone!");
+    } else if (this.bookingData.bookingStatus == null || this.bookingData.bookingStatus == '') {
+      this.openError("Choose Booking Status!");
+    } else if (this.bookingData.roomType == null || this.bookingData.roomType == '') {
+      this.openError("Choose RoomType");
+    } else if (this.bookingData.noOfRooms == null || this.bookingData.noOfRooms == '' || this.bookingData.noOfRooms == '0') {
+      this.openError("Enter The Rooms");
+    } else if (this.bookingData.pax == null || this.bookingData.pax == '' || this.bookingData.pax == '0') {
+      this.openError("Enter The Pax");
+    } else {
+      this.saveCheckGuestName();
+    }
+    //alert(this.bookingData.guesture);
   }
-  saveCheckGuestName(){
-   
-    this.api.checkGuestList(this.bookingData.guestName)
-      .subscribe((res: any) => {
-       // alert("res.."+res);
-       if(res!==null){
-        alert("Guest Name Already Exist");
-        const element = this.renderer.selectRootElement('#input1');
-        element.focus()
-          
-       }else{
-         if(this.bookingData.advance!==null && this.bookingData.advance!==0 ){
-          this.openSettlementDialog(this.bookingData.advance);
-         }else{
-          this.bookingData.settleList=this.restDataApiService.settleListData; 
-          this.restDataApiService.saveReservationData(this.bookingData);
-//alert("save");
-         }
-       
-       }
-      }, err => {
-        console.log(err);
-      });
-  
+  saveCheckGuestName() {
 
+    if (this.bookingData.guestId === '') {
 
-}
-
-
-  checkGuestName(){
-   
       this.api.checkGuestList(this.bookingData.guestName)
         .subscribe((res: any) => {
-         // alert("res.."+res);
-         if(res!==null){
-          alert("Guest Name Already Exist");
-          const element = this.renderer.selectRootElement('#input1');
-          element.focus()
-          
-         }
+          // alert("res.."+res);
+          if (res !== null) {
+            alert("Guest Name Already Exist");
+            const element = this.renderer.selectRootElement('#input1');
+            element.focus()
+
+          } else {
+            this.checkAdavanceDialog();
+
+          }
         }, err => {
           console.log(err);
         });
-    
+    } else {
+      this.checkAdavanceDialog();
 
-  
+    }
+
+
+  }
+
+
+  checkAdavanceDialog() {
+    if (this.bookingData.advance !== null && this.bookingData.advance !== 0) {
+      this.openSettlementDialog(this.bookingData.advance);
+    } else {
+      this.bookingData.settleList = this.restDataApiService.settleListData;
+      this.restDataApiService.saveReservationData(this.bookingData);
+    }
+  }
+
+  checkGuestName() {
+
+    this.api.checkGuestList(this.bookingData.guestName)
+      .subscribe((res: any) => {
+        // alert("res.."+res);
+        if (res !== null) {
+          alert("Guest Name Already Exist");
+          const element = this.renderer.selectRootElement('#input1');
+          element.focus()
+
+        }
+      }, err => {
+        console.log(err);
+      });
+
+
+
   }
 
 

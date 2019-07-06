@@ -13,7 +13,7 @@
 
     <mat-grid-tile class="menu-grid-tiles edit" >
        
-        <div class="menu-item">
+        <div class="menu-item" (click)="openBookingList()">
  
            <i class="material-icons menu-item-icon">edit</i>
             
@@ -159,7 +159,7 @@
           <input type="text" required  aria-label="Number"  [(ngModel)]="bookingData.guestName" name="bookingData.guestName" matInput   [matAutocomplete]="usersComp" >
           <mat-placeholder class="placeholder">Search Guest</mat-placeholder>
           <mat-autocomplete #usersComp="matAutocomplete" >
-            <mat-option *ngFor="let bookingData of restDataApiService.guestListData | async" [value]="bookingData.guestName">
+            <mat-option *ngFor="let bookingData of restDataApiService.guestListData" [value]="bookingData.guestName" (onSelectionChange)="guestSelect(bookingData)">
               {{bookingData.guestName}}
             </mat-option>
           </mat-autocomplete>

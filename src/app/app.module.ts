@@ -1,3 +1,4 @@
+import { BookingListComponent } from './home/booking-list/booking-list.component';
 import { CheckOutComponent } from './home/check-out/check-out.component';
 import { CheckInComponent } from './home/check-in/check-in.component';
 import { LoginFormModule } from './login-form/login-form.module';
@@ -48,7 +49,7 @@ import { ErrorDialogComponent } from './home/error-dialog/error-dialog.component
     LoginFormModule,
     HomeModule
   ],
-  entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,SettlementComponent,ErrorDialogComponent],
+  entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,SettlementComponent,ErrorDialogComponent,BookingListComponent],
   providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},MomentDateAdapter,MatDialogConfig,
     {provide: DateAdapter, useClass: MomentDateAdapter}],
   bootstrap: [AppComponent]
