@@ -10,7 +10,7 @@ export class RestApiService {
 
   // apiUrl = 'http://192.168.1.6:8080/roomapi/';
 
-  apiUrl = 'http://192.168.1.3:8090/roomapi/';
+  apiUrl = 'http://192.168.1.2:8090/roomapi/';
 
   constructor(private http: HttpClient) {
 
