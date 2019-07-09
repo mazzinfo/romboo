@@ -28,7 +28,7 @@ import { SettlementComponent } from './home/settlement/settlement.component';
 import { ErrorDialogComponent } from './home/error-dialog/error-dialog.component';
 import { PipesModule } from './pipes/pipes.module';
 import { SearchGuestPipe } from './pipes/search-guest.pipe';
-
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { SearchGuestPipe } from './pipes/search-guest.pipe';
     MatIconModule, 
     MatDialogModule,
     FormsModule,
+    AngularDateTimePickerModule,
     AgGridModule.withComponents([]),
     HttpClientModule,
     NgxMaterialTimepickerModule,

@@ -82,8 +82,9 @@
       <div class="column">
          
             <div class="input-group">
+              
             <div class="ngx-timepicker-fromtime-field">
-                <ngx-timepicker-field class="ngx-timepicker-fromtime" [(ngModel)]="bookingData.bookingFromTime" name="bookingData.bookingFromTime" [toggleIcon]="icon"></ngx-timepicker-field>
+                <ngx-timepicker-field class="ngx-timepicker-fromtime" readonly  [(ngModel)]="bookingData.bookingFromTime" name="bookingData.bookingFromTime" [toggleIcon]="icon"></ngx-timepicker-field>
                 <ng-template #icon>
                     <i class="material-icons schedule">schedule</i>
                 </ng-template>
@@ -305,7 +306,7 @@
       
         <div class="column column12">
       <button id="submit" *ngIf="saveBookingBtn" (click)="saveBooking();" class="submit-btn add" >Save Booking</button>
-      <button id="submit" *ngIf="updateBookingBtn" class="submit-btn edit" >Update Booking</button>
+      <button id="submit" *ngIf="updateBookingBtn" (click)="updateReservation();" class="submit-btn edit" >Update Booking</button>
       <button id="submit" *ngIf="deleteBookingBtn" class="submit-btn view" >Delete Booking</button>
       </div>
     </div>

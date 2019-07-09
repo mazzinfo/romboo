@@ -47,21 +47,19 @@ export class RestDataApiService {
   async getBookingGuestList(guestId) {
     this.api.getBookingListByGuestId(guestId)
       .subscribe((res: any[]) => {
+        if(res!=null){
         this.bookingGuestListData = res;
+        }else{
+          this.bookingGuestListData =[];
+        }
       }, err => {
         console.log(err);
       });
   }
 
 
-  async saveReservationData(bookingData) {
-    this.api.saveReservation(bookingData)
-      .subscribe((res: any[]) => {
-       
-      }, err => {
-        console.log(err);
-      });
-  }
+ 
+
 
 
   async getSettleList() {

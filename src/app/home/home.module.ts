@@ -15,13 +15,14 @@ import { AgGridModule } from 'ag-grid-angular';
 import { SettlementComponent } from './settlement/settlement.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { BookingListComponent } from './booking-list/booking-list.component';
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 
 @NgModule({
   declarations: [DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent,
      SettlementComponent, ErrorDialogComponent, BookingListComponent],
   imports: [
     CommonModule,FormsModule,LayoutModule,MaterialModule,NgxMaterialTimepickerModule,AgGridModule.withComponents([]),
-    PipesModule
+    PipesModule,AngularDateTimePickerModule
   ],
   exports:[CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,ReservationComponent]
 })

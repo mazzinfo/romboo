@@ -34,7 +34,7 @@ deleteBookingBtn=false;
   bookingData = {
     bookingDate: moment(), bookingFromDate: moment(), bookingToDate: moment().add(1, 'days'), bookingFromTime: moment().format("HH:mm"),
     bookingToTime: moment().format("HH:mm"), regularGuest: '', regularGuestNo: '', guesture: '', guestId: '', guestName: '',editGuestName:'', companyName: '', phoneNo: '',
-    city: '', emailId: '', bookingStatus: '', roomType: '', noOfRooms: '', pax: '',bookingPcKey:'', bookingId: '', instructionsFor: '', pickupDetails: '', advance: 0, settleList: ''
+    city: '', emailId: '', bookingStatus: '', roomType: '', noOfRooms: '', pax: '',bookingPcKey:'', bookingId: '',linePcKey:'', instructionsFor: '', pickupDetails: '', advance: 0, settleList: ''
   }
   term: string = '';
 
@@ -78,14 +78,42 @@ deleteBookingBtn=false;
     {headerName: 'No Of Rooms', field: 'noOfRooms',sortable: true, filter: true},
     {headerName: 'No Of Pax', field: 'pax',sortable: true, filter: true},
     {headerName: 'Bill Instr', field: 'billinstr',sortable: true, filter: true},
+    {headerName: 'linePcKey', field: 'linePcKey',sortable: true, filter: true,hide:true},
     {headerName: 'PicKup Details', field: 'picKupDetails',sortable: true, filter: true },
 ];
+fromTimeChange(event){
+  this.bookingData.bookingFromTime=moment(event).format("HH:mm");
+  console.log("from time.."+ this.bookingData.bookingFromTime);
+}
+
+updateReservation(){
+  console.log('...'+this.bookingData.bookingFromTime  );
+  console.log('tttt'+moment(this.bookingData.bookingFromTime,'h:mm a').format('HH:mm'));
+  this.bookingData.bookingFromTime=moment(this.bookingData.bookingFromTime,'h:mm a').format('HH:mm');
+  this.bookingData.bookingToTime=moment(this.bookingData.bookingToTime,'h:mm a').format('HH:mm');
+  this.updateReservationData(this.bookingData);
+}
+
+async updateReservationData(bookingData) {
+  this.api.updateReservation(bookingData)
+    .subscribe((res: any[]) => {
+      if(res!=null){
+        this.restDataApiService.bookingGuestListData = [];
+        this.setIntialData();
+     alert("Booking is successfully updated");
+      }
+     
+    }, err => {
+      console.log(err);
+    });
+}
 
 
 getSelectedBooking(event){
   console.log("selectedRowsString.."+this.gridApi.getSelectedRows()[0].arrivalMode);
 
   this.bookingData.bookingPcKey=this.gridApi.getSelectedRows()[0].bookingPcKey;
+  this.bookingData.linePcKey=this.gridApi.getSelectedRows()[0].linePcKey;
   this.bookingData.bookingDate=moment(this.gridApi.getSelectedRows()[0].bookingDate);
   this.bookingData.bookingFromDate=moment(this.gridApi.getSelectedRows()[0].fromDate);
   this.bookingData.bookingFromTime=moment(this.gridApi.getSelectedRows()[0].fromDate).format("HH:mm");
@@ -132,6 +160,7 @@ onGridReady(params) {
     this.oldGuest = false;
     this.isReadOnly=false;
     this.setIntialData();
+    this.restDataApiService.bookingGuestListData=[];
   }
 
   setIntialData(){
@@ -170,6 +199,7 @@ onGridReady(params) {
     this.oldGuest = true;
     this.isReadOnly=true;
     this.setIntialData();
+    this.restDataApiService.bookingGuestListData=[];
   
   }
 
@@ -185,6 +215,7 @@ onGridReady(params) {
     this.oldGuest = true;
     this.isReadOnly=true;
     this.setIntialData();
+    this.restDataApiService.bookingGuestListData=[];
   }
 
   ngOnInit() {
@@ -259,12 +290,28 @@ if(this.updateBookingBtn || this.deleteBookingBtn){
 
         if (data == true) {
           this.bookingData.settleList = this.restDataApiService.settleListData;
-          this.restDataApiService.saveReservationData(this.bookingData);
+          this.bookingData.bookingFromTime=moment(this.bookingData.bookingFromTime,'h:mm a').format('HH:mm');
+          this.bookingData.bookingToTime=moment(this.bookingData.bookingToTime,'h:mm a').format('HH:mm');
+          this.saveReservationData(this.bookingData);
         }
         console.log("Dialog output:", data);
       }
     );
 
+  }
+
+  
+  async saveReservationData(bookingData) {
+    this.api.saveReservation(bookingData)
+      .subscribe((res: any[]) => {
+        if(res!=null){
+          this.restDataApiService.todayBookingListData = res;
+          this.setIntialData();
+       alert("Booking is successfully saved");
+        }
+      }, err => {
+        console.log(err);
+      });
   }
 
 
@@ -360,12 +407,18 @@ if(this.updateBookingBtn || this.deleteBookingBtn){
   }
 
 
+  
+
   checkAdavanceDialog() {
     if (this.bookingData.advance !== null && this.bookingData.advance !== 0) {
       this.openSettlementDialog(this.bookingData.advance);
     } else {
       this.bookingData.settleList = this.restDataApiService.settleListData;
-      this.restDataApiService.saveReservationData(this.bookingData);
+      this.bookingData.bookingFromTime=moment(this.bookingData.bookingFromTime,'h:mm a').format('HH:mm');
+      this.bookingData.bookingToTime=moment(this.bookingData.bookingToTime,'h:mm a').format('HH:mm');
+   
+     // this.bookingData.bookingToTime=moment(this.bookingData.bookingToDate+''+this.bookingData.bookingToTime).format("HH:mm");
+      this.saveReservationData(this.bookingData);
     }
   }
 
