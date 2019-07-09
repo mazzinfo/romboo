@@ -26,10 +26,15 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { MomentDateAdapter, MOMENT_DATE_FORMATS } from 'src/app/shared/Adapter/MomentDateAdapter'
 import { SettlementComponent } from './home/settlement/settlement.component';
 import { ErrorDialogComponent } from './home/error-dialog/error-dialog.component';
+import { PipesModule } from './pipes/pipes.module';
+import { SearchGuestPipe } from './pipes/search-guest.pipe';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+
+   
     
   ],
   imports: [
@@ -47,7 +52,8 @@ import { ErrorDialogComponent } from './home/error-dialog/error-dialog.component
     NgxMaterialTimepickerModule,
     LayoutModule,
     LoginFormModule,
-    HomeModule
+    HomeModule,
+    PipesModule,
   ],
   entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,SettlementComponent,ErrorDialogComponent,BookingListComponent],
   providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},MomentDateAdapter,MatDialogConfig,

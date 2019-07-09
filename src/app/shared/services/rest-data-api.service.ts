@@ -12,6 +12,7 @@ export class RestDataApiService {
   public companyListData: any = [];
   public todayBookingListData: any = [];
   public bookingListData: any = [];
+  public bookingGuestListData: any = [];
   public bookingStatusListData: any = [];
   public roomTypeListData: any = [];
   public settleListData: any = [];
@@ -37,6 +38,16 @@ export class RestDataApiService {
     this.api.getBookingList()
       .subscribe((res: any[]) => {
         this.bookingListData = res;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+
+  async getBookingGuestList(guestId) {
+    this.api.getBookingListByGuestId(guestId)
+      .subscribe((res: any[]) => {
+        this.bookingGuestListData = res;
       }, err => {
         console.log(err);
       });

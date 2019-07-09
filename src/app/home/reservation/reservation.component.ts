@@ -2,7 +2,6 @@ import { SettlementComponent } from './../settlement/settlement.component';
 import { RestDataApiService } from './../../shared/services/rest-data-api.service';
 import { RestApiService } from './../../shared/services/rest-api.service';
 import { Component, OnInit, ViewChild, ElementRef, Inject, Renderer } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
@@ -16,28 +15,40 @@ import { BookingListComponent } from '../booking-list/booking-list.component';
 })
 export class ReservationComponent implements OnInit {
 
+bookingName='New Booking';
+bookingListName='Today Booking List';
 
+isReadOnly=false;
+
+saveBookingBtn=true;
+updateBookingBtn=false;
+deleteBookingBtn=false;
   newGuest = true;
   oldGuest = false;
+  reservationGuest=false;
+  gridApi:any;
+  gridColumnApi:any;
 
 
   public momentDate: moment.Moment;
   bookingData = {
     bookingDate: moment(), bookingFromDate: moment(), bookingToDate: moment().add(1, 'days'), bookingFromTime: moment().format("HH:mm"),
-    bookingToTime: moment().format("HH:mm"), regularGuest: '', regularGuestNo: '', guesture: '', guestId: '', guestName: '', companyName: '', phoneNo: '',
-    city: '', emailId: '', bookingStatus: '', roomType: '', noOfRooms: '', pax: '', bookingId: '', instructionsFor: '', pickupDetails: '', advance: 0, settleList: ''
+    bookingToTime: moment().format("HH:mm"), regularGuest: '', regularGuestNo: '', guesture: '', guestId: '', guestName: '',editGuestName:'', companyName: '', phoneNo: '',
+    city: '', emailId: '', bookingStatus: '', roomType: '', noOfRooms: '', pax: '',bookingPcKey:'', bookingId: '', instructionsFor: '', pickupDetails: '', advance: 0, settleList: ''
   }
+  term: string = '';
+
+  searchFn(ev: any){
+    this.term = ev.target.value;
+  }
+
 
 
   fromMinDate = moment().add(-1, 'days');
   toMinDate = moment().add(-1, 'days');
 
   columnDefs = [
-    {
-      displayName: 'Actions', cellTemplate:
-        '<div class="grid-action-cell">' +
-        '<a (click)="deleteThisRow(row.entity);" >Delete</a></div>'
-    },
+
     { headerName: 'Guest Name', field: 'guestName', sortable: true, filter: true },
     { headerName: 'Company Name', field: 'debtorName', sortable: true, filter: true },
     { headerName: 'Phone No', field: 'phone', sortable: true, filter: true },
@@ -51,6 +62,52 @@ export class ReservationComponent implements OnInit {
     { headerName: 'Address', field: 'address', sortable: true, filter: true },
   ];
 
+  
+  bookingEditcolumnDefs = [
+    
+    {headerName: 'bookingPcKey', field: 'bookingPcKey',sortable: true, filter: true,hide:true },
+    {headerName: 'Guest Name', field: 'guestName',sortable: true, filter: true,hide:true },
+    {headerName: 'Company Name', field: 'debtorName',sortable: true, filter: true,hide:true},
+    {headerName: 'Phone No', field: 'phone',sortable: true, filter: true,hide:true },
+    {headerName: 'From Date', field: 'fromDate',sortable: true, filter: true,checkboxSelection: true ,pinned:"left"},
+    {headerName: 'To Date', field: 'toDate',sortable: true, filter: true,pinned:"left"},
+    {headerName: 'Advance', field: 'amount',sortable: true, filter: true,pinned:"left"},
+    {headerName: 'Booking Id', field: 'price',sortable: true, filter: true,hide:true},
+    {headerName: 'arrivalMode', field: 'arrivalMode',sortable: true, filter: true,hide:true},
+    {headerName: 'Room Type', field: 'roomType',sortable: true, filter: true},
+    {headerName: 'No Of Rooms', field: 'noOfRooms',sortable: true, filter: true},
+    {headerName: 'No Of Pax', field: 'pax',sortable: true, filter: true},
+    {headerName: 'Bill Instr', field: 'billinstr',sortable: true, filter: true},
+    {headerName: 'PicKup Details', field: 'picKupDetails',sortable: true, filter: true },
+];
+
+
+getSelectedBooking(event){
+  console.log("selectedRowsString.."+this.gridApi.getSelectedRows()[0].arrivalMode);
+
+  this.bookingData.bookingPcKey=this.gridApi.getSelectedRows()[0].bookingPcKey;
+  this.bookingData.bookingDate=moment(this.gridApi.getSelectedRows()[0].bookingDate);
+  this.bookingData.bookingFromDate=moment(this.gridApi.getSelectedRows()[0].fromDate);
+  this.bookingData.bookingFromTime=moment(this.gridApi.getSelectedRows()[0].fromDate).format("HH:mm");
+  this.bookingData.bookingToDate=moment(this.gridApi.getSelectedRows()[0].toDate);
+  this.bookingData.bookingToTime=moment(this.gridApi.getSelectedRows()[0].toDate).format("HH:mm");
+  this.bookingData.bookingStatus= this.restDataApiService.bookingStatusListData.filter(x => x.arrivalCode === Number(this.gridApi.getSelectedRows()[0].arrivalMode))[0].arrivalCode;
+  this.bookingData.roomType = this.restDataApiService.roomTypeListData.filter(x => x.typeName === this.gridApi.getSelectedRows()[0].roomType)[0].roomTypeCode;
+ 
+  this.bookingData.noOfRooms=this.gridApi.getSelectedRows()[0].noOfRooms;
+  this.bookingData.pax=this.gridApi.getSelectedRows()[0].pax;
+  this.bookingData.pickupDetails=this.gridApi.getSelectedRows()[0].picKupDetails;
+  this.bookingData.instructionsFor=this.gridApi.getSelectedRows()[0].billinstr;
+  this.bookingData.advance=this.gridApi.getSelectedRows()[0].amount;
+}
+
+onGridReady(params) {
+  this.gridApi = params.api;
+  this.gridColumnApi = params.columnApi;
+  
+}
+
+
   rowData = [
     // { make: 'Dlx', model: 'Celica', price: 35000 },
     // { make: 'Ford', model: 'Mondeo', price: 32000 },
@@ -62,6 +119,72 @@ export class ReservationComponent implements OnInit {
 
 
 
+  }
+
+  bookingAdd(){
+    this.bookingName="New Booking";
+    this.bookingListName='Today Booking List';
+    this.updateBookingBtn=false;
+    this.saveBookingBtn=true;
+    this.deleteBookingBtn=false;
+    this.bookingData.regularGuest = "no";
+    this.newGuest = true;
+    this.oldGuest = false;
+    this.isReadOnly=false;
+    this.setIntialData();
+  }
+
+  setIntialData(){
+    this.bookingData.bookingDate= moment();
+    this.bookingData. bookingFromDate= moment();
+    this.bookingData.  bookingToDate=moment().add(1, 'days');
+    this.bookingData.bookingFromTime=moment().format("HH:mm");
+    this.bookingData. bookingToTime=moment().format("HH:mm");
+    this.bookingData.guesture= '';
+    this.bookingData.guestId=''; 
+    this.bookingData.guestName= ''
+    this.bookingData.companyName= ''
+    this.bookingData.phoneNo= '';
+    this.bookingData.city= '';
+    this.bookingData.emailId= '';
+    this.bookingData.bookingStatus= '';
+    this.bookingData.roomType= '';
+    this.bookingData.noOfRooms= ''
+    this.bookingData. pax= '';
+    this.bookingData.bookingId= '';
+    this.bookingData.instructionsFor= '';
+    this.bookingData. pickupDetails= ''; 
+    this.bookingData.advance=0; 
+    this.bookingData.settleList= '';
+    
+  }
+
+  bookingDelete(){
+    this.bookingName="Delete Booking";
+    this.bookingListName='Booking List';
+    this.updateBookingBtn=false;
+    this.saveBookingBtn=false;
+    this.deleteBookingBtn=true;
+    this.bookingData.regularGuest = "yes";
+    this.newGuest = false;
+    this.oldGuest = true;
+    this.isReadOnly=true;
+    this.setIntialData();
+  
+  }
+
+  bookingEdit(){
+    this.reservationGuest=true;
+    this.bookingName="Edit Booking";
+    this.bookingListName='Booking List';
+    this.updateBookingBtn=true;
+    this.saveBookingBtn=false;
+    this.deleteBookingBtn=false;
+    this.bookingData.regularGuest = "yes";
+    this.newGuest = false;
+    this.oldGuest = true;
+    this.isReadOnly=true;
+    this.setIntialData();
   }
 
   ngOnInit() {
@@ -104,11 +227,15 @@ export class ReservationComponent implements OnInit {
 
   getguesture: any = [];
   guestSelect(guestData) {
+if(this.updateBookingBtn || this.deleteBookingBtn){
+    this.restDataApiService.getBookingGuestList(guestData.guestId);
+}
 
     this.getguesture = this.restDataApiService.guestureListData.filter(x => x.description === guestData.mrMrs);
 
 
     this.bookingData.guestId = guestData.guestId;
+    this.bookingData.guestName = guestData.guestName;
     this.bookingData.companyName = guestData.grpCode;
     this.bookingData.guesture = this.getguesture[0].pcKey;
 

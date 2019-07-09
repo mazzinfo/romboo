@@ -2,7 +2,7 @@
 <mat-grid-list class="action-menu-grid" cols="4" rowHeight="60px">
     <mat-grid-tile class="menu-grid-tiles add" >
        
-       <div class="menu-item">
+       <div class="menu-item" (click)="bookingAdd()">
 
           <i class="material-icons menu-item-icon">add_circle_outline</i>
            
@@ -13,7 +13,7 @@
 
     <mat-grid-tile class="menu-grid-tiles edit" >
        
-        <div class="menu-item" (click)="openBookingList()">
+        <div class="menu-item" (click)="bookingEdit()">
  
            <i class="material-icons menu-item-icon">edit</i>
             
@@ -24,11 +24,11 @@
 
      <mat-grid-tile class="menu-grid-tiles view" >
        
-        <div class="menu-item">
+        <div class="menu-item" (click)="bookingDelete()">
  
-           <i class="material-icons menu-item-icon">visibility</i>
+           <i class="material-icons menu-item-icon">delete</i>
             
-             <span class="menu-item-icon-caption">View</span>
+             <span class="menu-item-icon-caption">Delete</span>
          </div>
         
      </mat-grid-tile>
@@ -51,7 +51,7 @@
 </header>
   <form class="myForm">
       <fieldset class="heading-data"   style="width: 96%;height: 70%;">
-          <legend class="heading-desc">Booking</legend>
+          <legend class="heading-desc">{{bookingName}}</legend>
     <div class="row">
        
       <div class="column">
@@ -156,22 +156,18 @@
         </mat-form-field>
 
         <mat-form-field *ngIf="oldGuest">
-          <input type="text" required  aria-label="Number"  [(ngModel)]="bookingData.guestName" name="bookingData.guestName" matInput   [matAutocomplete]="usersComp" >
-          <mat-placeholder class="placeholder">Search Guest</mat-placeholder>
-          <mat-autocomplete #usersComp="matAutocomplete" >
-            <mat-option *ngFor="let bookingData of restDataApiService.guestListData" [value]="bookingData.guestName" (onSelectionChange)="guestSelect(bookingData)">
-              {{bookingData.guestName}}
-            </mat-option>
-          </mat-autocomplete>
-
-         
-
-
-        </mat-form-field>
-
 
         
 
+          <input type="text" required  aria-label="Number"  [(ngModel)]="bookingData.guestName" name="bookingData.guestName"
+           matInput   [matAutocomplete]="usersComp" (input)="searchFn($event);" >
+          <mat-placeholder class="placeholder">Search Guest</mat-placeholder>
+          <mat-autocomplete #usersComp="matAutocomplete" >
+            <mat-option *ngFor="let bookingData of restDataApiService.guestListData | searchGuest: term" [value]="bookingData.guestName" (onSelectionChange)="guestSelect(bookingData)">
+              {{bookingData.guestName}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 </div>
         </div>
       
@@ -296,7 +292,7 @@
                 <div class="column">
                     <div class="input-group">
                     <mat-form-field color="accent">
-                      <input matInput type="number" value="" [(ngModel)]="bookingData.advance" name="bookingData.advance">
+                      <input matInput type="number" [attr.readonly]= "isReadOnly" [value]="bookingData.advance | number:'3.2-5'" [(ngModel)]="bookingData.advance" name="bookingData.advance">
                       <mat-placeholder class="placeholder">Advance</mat-placeholder>
                       
                     </mat-form-field>
@@ -308,21 +304,59 @@
     <div class="row">
       
         <div class="column column12">
-      <button id="submit" (click)="saveBooking();" class="submit-btn" >Save Booking</button>
+      <button id="submit" *ngIf="saveBookingBtn" (click)="saveBooking();" class="submit-btn add" >Save Booking</button>
+      <button id="submit" *ngIf="updateBookingBtn" class="submit-btn edit" >Update Booking</button>
+      <button id="submit" *ngIf="deleteBookingBtn" class="submit-btn view" >Delete Booking</button>
       </div>
     </div>
     <div class="row">
     
       <fieldset class="heading-data"  style="width: 99%;height: 30%;">
-          <legend class="heading-desc">Today Booking</legend>
+          <legend class="heading-desc">
+            {{bookingListName}}
+          </legend>
           <div class="column">  
-            <ag-grid-angular 
-    style="width: 100%; height: 250px;" 
+            <ag-grid-angular  *ngIf="saveBookingBtn"
+    style="width: 100%; height: 300px;" 
     class="ag-theme-balham"
     [rowData]="restDataApiService.todayBookingListData" 
     [columnDefs]="columnDefs"
+    [pagination]="true"
+[paginationPageSize]="10"
+[animateRows]="true"
     >
    
+</ag-grid-angular>
+
+
+<ag-grid-angular  *ngIf="updateBookingBtn"
+style="width: 100%; height: 320px;" 
+class="ag-theme-balham"
+[rowData]="restDataApiService.bookingGuestListData" 
+[columnDefs]="bookingEditcolumnDefs"
+[pagination]="true"
+[paginationPageSize]="10"
+[animateRows]="true"
+[rowSelection]="single"
+(gridReady)="onGridReady($event)"
+(selectionChanged)="getSelectedBooking($event)"
+>
+
+
+
+</ag-grid-angular>
+<ag-grid-angular  *ngIf="deleteBookingBtn"
+style="width: 100%; height: 320px;" 
+class="ag-theme-balham"
+[rowData]="restDataApiService.bookingGuestListData" 
+[columnDefs]="bookingEditcolumnDefs"
+[pagination]="true"
+[paginationPageSize]="10"
+[animateRows]="true"
+[rowSelection]="single"
+(gridReady)="onGridReady($event)"
+>
+
 </ag-grid-angular>
 </div>
 

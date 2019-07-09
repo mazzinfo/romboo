@@ -1,3 +1,4 @@
+import { PipesModule } from './../pipes/pipes.module';
 import { MaterialModule } from './../material/material.module';
 import { LayoutModule } from './../layout/layout.module';
 import { NgModule } from '@angular/core';
@@ -16,9 +17,11 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { BookingListComponent } from './booking-list/booking-list.component';
 
 @NgModule({
-  declarations: [ DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent, SettlementComponent, ErrorDialogComponent, BookingListComponent],
+  declarations: [DashboardComponent, CheckInComponent, CheckOutComponent, DirtyComponent, ReservationComponent,
+     SettlementComponent, ErrorDialogComponent, BookingListComponent],
   imports: [
-    CommonModule,FormsModule,LayoutModule,MaterialModule,NgxMaterialTimepickerModule,AgGridModule.withComponents([])
+    CommonModule,FormsModule,LayoutModule,MaterialModule,NgxMaterialTimepickerModule,AgGridModule.withComponents([]),
+    PipesModule
   ],
   exports:[CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,ReservationComponent]
 })
