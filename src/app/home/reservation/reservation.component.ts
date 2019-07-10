@@ -8,6 +8,7 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import { BookingListComponent } from '../booking-list/booking-list.component';
 
 
+
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
@@ -32,7 +33,7 @@ deleteBookingBtn=false;
 
   public momentDate: moment.Moment;
   bookingData = {
-    bookingDate: moment(), bookingFromDate: moment(), bookingToDate: moment().add(1, 'days'), bookingFromTime: moment().format("HH:mm"),
+    bookingDate: moment(), updateFromDate:'',updateToDate:'',bookingFromDate: moment(), bookingToDate: moment().add(1, 'days'), bookingFromTime: moment().format("HH:mm"),
     bookingToTime: moment().format("HH:mm"), regularGuest: '', regularGuestNo: '', guesture: '', guestId: '', guestName: '',editGuestName:'', companyName: '', phoneNo: '',
     city: '', emailId: '', bookingStatus: '', roomType: '', noOfRooms: '', pax: '',bookingPcKey:'', bookingId: '',linePcKey:'', instructionsFor: '', pickupDetails: '', advance: 0, settleList: ''
   }
@@ -40,6 +41,13 @@ deleteBookingBtn=false;
 
   searchFn(ev: any){
     this.term = ev.target.value;
+  }
+
+  getFromDate(event){
+    console.log("date.."+moment(event.value).format('DD MMM YYYY hh:mm a'));
+    
+    this.bookingData.bookingFromDate=moment(this.bookingData.bookingFromDate,'YYYY-MM-DD');
+    console.log("date  value.."+moment(this.bookingData.bookingFromDate).format('YYYY-MM-DD'));
   }
 
 
@@ -91,6 +99,8 @@ updateReservation(){
   console.log('tttt'+moment(this.bookingData.bookingFromTime,'h:mm a').format('HH:mm'));
   this.bookingData.bookingFromTime=moment(this.bookingData.bookingFromTime,'h:mm a').format('HH:mm');
   this.bookingData.bookingToTime=moment(this.bookingData.bookingToTime,'h:mm a').format('HH:mm');
+  this.bookingData.updateFromDate=''+moment(this.bookingData.bookingFromDate).format('YYYY-MM-DD');
+  this.bookingData.updateToDate=''+moment(this.bookingData.bookingToDate).format('YYYY-MM-DD');
   this.updateReservationData(this.bookingData);
 }
 
@@ -169,6 +179,8 @@ onGridReady(params) {
     this.bookingData.  bookingToDate=moment().add(1, 'days');
     this.bookingData.bookingFromTime=moment().format("HH:mm");
     this.bookingData. bookingToTime=moment().format("HH:mm");
+    this.bookingData.updateFromDate='';
+    this.bookingData.updateToDate='';
     this.bookingData.guesture= '';
     this.bookingData.guestId=''; 
     this.bookingData.guestName= ''
@@ -292,6 +304,8 @@ if(this.updateBookingBtn || this.deleteBookingBtn){
           this.bookingData.settleList = this.restDataApiService.settleListData;
           this.bookingData.bookingFromTime=moment(this.bookingData.bookingFromTime,'h:mm a').format('HH:mm');
           this.bookingData.bookingToTime=moment(this.bookingData.bookingToTime,'h:mm a').format('HH:mm');
+          this.bookingData.updateFromDate=''+moment(this.bookingData.bookingFromDate).format('YYYY-MM-DD');
+          this.bookingData.updateToDate=''+moment(this.bookingData.bookingToDate).format('YYYY-MM-DD');
           this.saveReservationData(this.bookingData);
         }
         console.log("Dialog output:", data);
@@ -416,8 +430,8 @@ if(this.updateBookingBtn || this.deleteBookingBtn){
       this.bookingData.settleList = this.restDataApiService.settleListData;
       this.bookingData.bookingFromTime=moment(this.bookingData.bookingFromTime,'h:mm a').format('HH:mm');
       this.bookingData.bookingToTime=moment(this.bookingData.bookingToTime,'h:mm a').format('HH:mm');
-   
-     // this.bookingData.bookingToTime=moment(this.bookingData.bookingToDate+''+this.bookingData.bookingToTime).format("HH:mm");
+      this.bookingData.updateFromDate=''+moment(this.bookingData.bookingFromDate).format('YYYY-MM-DD');
+  this.bookingData.updateToDate=''+moment(this.bookingData.bookingToDate).format('YYYY-MM-DD');
       this.saveReservationData(this.bookingData);
     }
   }

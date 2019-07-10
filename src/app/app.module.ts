@@ -19,7 +19,7 @@ import { MatDialogModule, MatDialogConfig } from '@angular/material/dialog';
 import { DirtyComponent } from './home/dirty/dirty.component';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationComponent } from './home/reservation/reservation.component';
-import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
+import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AgGridModule } from 'ag-grid-angular';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -29,6 +29,7 @@ import { ErrorDialogComponent } from './home/error-dialog/error-dialog.component
 import { PipesModule } from './pipes/pipes.module';
 import { SearchGuestPipe } from './pipes/search-guest.pipe';
 import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -57,8 +58,8 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
     PipesModule,
   ],
   entryComponents: [CheckInComponent,CheckOutComponent,DirtyComponent,ReservationComponent,SettlementComponent,ErrorDialogComponent,BookingListComponent],
-  providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},MomentDateAdapter,MatDialogConfig,
-    {provide: DateAdapter, useClass: MomentDateAdapter}],
+  providers: [{provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS},MomentDateAdapter,MatDialogConfig,DatePipe,
+    {provide: DateAdapter, useClass: MomentDateAdapter,deps: [MAT_DATE_LOCALE]}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
